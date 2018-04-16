@@ -14,6 +14,8 @@ ELSE()
     SET(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
 ENDIF()
 
+set(CMAKE_CXX_FLAGS "-std=c++17 -fsanitize=address,undefined -Wall -Wno-mismatched-tags -Wno-sign-compare -pthread")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
 include_directories(
   ${PROJECT_SOURCE_DIR}/external/bwapi/bwapi/include
@@ -37,7 +39,6 @@ add_library(googletest
   ${GOOGLETEST_SOURCES}
 )
 
-
 file(GLOB bwemSources
   ${PROJECT_SOURCE_DIR}/src/*.cpp
 )
@@ -48,12 +49,9 @@ target_link_libraries(BWEBlib
   ${BWAPI_LIB_NAME}
 )
 
-
 file(GLOB testsources
-	#${GOOGLETEST_SOURCES}
   ${PROJECT_SOURCE_DIR}/tests/*.cpp
 )
-
 
 add_executable(tests
   ${testsources}
