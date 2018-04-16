@@ -14,7 +14,7 @@ ELSE()
     SET(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
 ENDIF()
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -fsanitize=address,undefined -Wall -Wno-mismatched-tags -Wno-sign-compare -pthread")
+set(CMAKE_CXX_FLAGS "-std=c++17 -fsanitize=address,undefined -Wall -Wno-mismatched-tags -Wno-sign-compare -pthread -fuse-ld=gold")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
 include_directories(
