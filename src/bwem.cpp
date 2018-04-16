@@ -10,9 +10,7 @@
 
 #include "bwem.h"
 
-namespace BWEM::detail {
-
-void onAssertThrowFailed(const std::string & file, int line, const std::string & condition, const std::string & message)
+void BWEM::detail::onAssertThrowFailed(const std::string & file, int line, const std::string & condition, const std::string & message)
 {
   std::ignore = file;
   std::ignore = line;
@@ -22,5 +20,3 @@ void onAssertThrowFailed(const std::string & file, int line, const std::string &
 	bwem_assert_debug_only(false);
 	throw Exception(file + ", line " + std::to_string(line) + " - " + message);
 }
-
-} // namespace BWEM::details

@@ -9,16 +9,10 @@
 
 #include "bwapiExt.h"
 
-namespace BWEM::BWAPI_ext {
-
-void drawDiagonalCrossMap(BWAPI::Position topLeft, BWAPI::Position bottomRight, BWAPI::Color col, BWAPI::Game *g)
+void BWEM::BWAPI_ext::drawDiagonalCrossMap(BWAPI::Position topLeft, BWAPI::Position bottomRight, BWAPI::Color col, BWAPI::Game *g)
 {
 	g->drawLineMap(topLeft, bottomRight, col);
   g->drawLineMap(BWAPI::Position{ bottomRight.x, topLeft.y }, BWAPI::Position{ topLeft.x, bottomRight.y }, col);
 }
-
-
-} // namespace BWEM::BWAPI_ext
-
 
 
