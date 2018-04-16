@@ -52,7 +52,7 @@ Area::Area(const Area & Other)
 
 Map * Area::GetMap() const
 {
-	return m_pGraph->GetMap();
+	return m_pGraph->GetMap<0>();
 }
 
 

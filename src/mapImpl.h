@@ -90,11 +90,11 @@ public:
 	Area *						GetArea(BWAPI::WalkPosition w)							{ return m_Graph.GetArea(w); }
 	Area *						GetArea(BWAPI::TilePosition t)							{ return m_Graph.GetArea(t); }
 
-	const Area *				GetNearestArea(BWAPI::WalkPosition w) const override	{ return m_Graph.GetNearestArea(w); }
-	const Area *				GetNearestArea(BWAPI::TilePosition t) const override	{ return m_Graph.GetNearestArea(t); }
+	const Area *				GetNearestArea(BWAPI::WalkPosition w) const override	{ return m_Graph.GetNearestArea<0>(w); }
+	const Area *				GetNearestArea(BWAPI::TilePosition t) const override	{ return m_Graph.GetNearestArea<0>(t); }
 
-	Area *						GetNearestArea(BWAPI::WalkPosition w)					{ return m_Graph.GetNearestArea(w); }
-	Area *						GetNearestArea(BWAPI::TilePosition t)					{ return m_Graph.GetNearestArea(t); }
+	Area *						GetNearestArea(BWAPI::WalkPosition w)					{ return m_Graph.GetNearestArea<0>(w); }
+	Area *						GetNearestArea(BWAPI::TilePosition t)					{ return m_Graph.GetNearestArea<0>(t); }
 
 
 	const CPPath &				GetPath(const BWAPI::Position & a, const BWAPI::Position & b, int * pLength = nullptr) const override { return m_Graph.GetPath(a, b, pLength); }

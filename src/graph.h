@@ -13,8 +13,8 @@
 #include "cp.h"
 #include "area.h"
 #include "bwapiExt.h"
-#include "utils.h"
 #include "defs.h"
+#include "tiles.h"
 
 
 namespace BWEM {
@@ -58,7 +58,9 @@ public:
 										Graph(MapImpl * pMap) : m_pMap(pMap) {}
 	Graph &								operator=(const Graph &) = delete;
 
+  template<int>
 	const MapImpl *						GetMap() const					{ return m_pMap; }
+  template<int>
 	MapImpl *							GetMap()						{ return m_pMap; }
 
 	const vector<Area> &				Areas() const					{ return m_Areas; }
@@ -74,8 +76,8 @@ public:
 	const Area *						GetArea(BWAPI::TilePosition t) const;
 	Area *								GetArea(BWAPI::TilePosition t)	{ return const_cast<Area *>(static_cast<const Graph &>(*this).GetArea(t)); }
 
-	template<class TPosition>const Area*GetNearestArea(TPosition p) const;
-	template<class TPosition> Area *	GetNearestArea(TPosition p)		{ return const_cast<Area *>(static_cast<const Graph &>(*this).GetNearestArea(p)); }
+	template<int dummy, class TPosition> const Area*GetNearestArea(TPosition p) const;
+	template<int dummy, class TPosition> Area *	GetNearestArea(TPosition p)		{ return const_cast<Area *>(static_cast<const Graph &>(*this).GetNearestArea<dummy>(p)); }
 
 
 	// Returns the list of all the ChokePoints in the Map.
@@ -130,13 +132,13 @@ private:
 };
 
 
-template<class TPosition>
+template<int dummy, class TPosition>
 const Area * Graph::GetNearestArea(TPosition p) const
 {
-	typedef typename TileOfPosition<TPosition>::type Tile_t;
+	using Tile_t = typename TileOfPosition<TPosition>::type;
 	if (const Area * area = GetArea(p)) return area;
 
-	p = GetMap()->BreadthFirstSearch(p,
+	p = GetMap<dummy>()->BreadthFirstSearch(p,
 					[this](const Tile_t & t, TPosition) { return t.AreaId() > 0; },	// findCond
 					[](const Tile_t &,       TPosition) { return true; });			// visitCond
 

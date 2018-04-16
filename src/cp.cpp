@@ -73,7 +73,7 @@ ChokePoint::ChokePoint(const ChokePoint & Other)
 
 Map * ChokePoint::GetMap() const
 {
-	return m_pGraph->GetMap();
+	return m_pGraph->GetMap<0>();
 }
 
 
@@ -107,7 +107,7 @@ void ChokePoint::OnBlockingNeutralDestroyed(const Neutral * pBlocking)
 		m_pBlockingNeutral = GetMap()->GetTile(m_pBlockingNeutral->TopLeft()).GetNeutral();
 
 		if (!m_pBlockingNeutral)
-			if (GetGraph()->GetMap()->AutomaticPathUpdate())
+			if (GetGraph()->GetMap<0>()->AutomaticPathUpdate())
 				m_blocked = false;
 	}
 

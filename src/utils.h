@@ -15,6 +15,8 @@
 #include <cstdint>
 #include <limits>
 #include <fstream>
+#include <cmath>
+#include <sstream>
 #include "defs.h"
 
 namespace BWEM {

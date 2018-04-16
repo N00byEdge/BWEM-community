@@ -50,7 +50,7 @@ Area * mainArea(MapImpl * pMap, TilePosition topLeft, TilePosition size)
 
 const Area * Graph::GetArea(WalkPosition w) const
 {
-	Area::id id = GetMap()->GetMiniTile(w).AreaId();
+	Area::id id = m_pMap->GetMiniTile(w).AreaId();
 	return id > 0 ? GetArea(id) : nullptr;
 }
 
@@ -58,7 +58,7 @@ const Area * Graph::GetArea(WalkPosition w) const
 
 const Area * Graph::GetArea(TilePosition t) const
 {
-	Area::id id = GetMap()->GetTile(t).AreaId();
+	Area::id id = m_pMap->GetTile(t).AreaId();
 	return id > 0 ? GetArea(id) : nullptr;
 }
 
@@ -92,8 +92,8 @@ void Graph::CreateChokePoints()
 	ChokePoint::index newIndex = 0;
 
 	vector<Neutral *> BlockingNeutrals;
-	for (auto & s : GetMap()->StaticBuildings())		if (s->Blocking()) BlockingNeutrals.push_back(s.get());
-	for (auto & m : GetMap()->Minerals())			if (m->Blocking()) BlockingNeutrals.push_back(m.get());
+	for (auto & s : m_pMap->StaticBuildings())		if (s->Blocking()) BlockingNeutrals.push_back(s.get());
+	for (auto & m : m_pMap->Minerals())			if (m->Blocking()) BlockingNeutrals.push_back(m.get());
 
 	const int pseudoChokePointsToCreate = count_if(BlockingNeutrals.begin(), BlockingNeutrals.end(),
 											[](const Neutral * n){ return !n->NextStacked(); });
@@ -105,7 +105,7 @@ void Graph::CreateChokePoints()
 
 	// 2) Dispatch the global raw frontier between all the relevant pairs of Areas:
 	map<pair<Area::id, Area::id>, vector<WalkPosition>> RawFrontierByAreaPair;
-	for (const auto & raw : GetMap()->RawFrontier())
+	for (const auto & raw : m_pMap->RawFrontier())
 	{
 		Area::id a = raw.first.first;
 		Area::id b = raw.first.second;
@@ -130,7 +130,7 @@ void Graph::CreateChokePoints()
 		{
 			vector<altitude_t> Altitudes;
 			for (auto w : RawFrontierAB)
-				Altitudes.push_back(GetMap()->GetMiniTile(w).Altitude());
+				Altitudes.push_back(m_pMap->GetMiniTile(w).Altitude());
 
 			bwem_assert(is_sorted(Altitudes.rbegin(), Altitudes.rend()));
 		}
@@ -178,7 +178,7 @@ void Graph::CreateChokePoints()
 			{
 				if (pB == pA) break;	// breaks symmetry
 
-				auto center = GetMap()->BreadthFirstSearch(WalkPosition(pNeutral->Pos()),
+				auto center = m_pMap->BreadthFirstSearch(WalkPosition(pNeutral->Pos()),
 						[](const MiniTile & miniTile, WalkPosition) { return miniTile.Walkable(); },	// findCond
 						[](const MiniTile &,          WalkPosition) { return true; });					// visitCond
 
@@ -315,7 +315,7 @@ void Graph::ComputeChokePointDistanceMatrix()
 // Note: same algo than Area::ComputeDistances (derived from Dijkstra)
 vector<int> Graph::ComputeDistances(const ChokePoint * start, const vector<const ChokePoint *> & Targets) const
 {
-	const MapImpl * pMap = GetMap();
+	const MapImpl * pMap = m_pMap;
 	vector<int> Distances(Targets.size());
 
 	Tile::UnmarkAll();
@@ -389,8 +389,8 @@ vector<int> Graph::ComputeDistances(const ChokePoint * start, const vector<const
 
 const CPPath & Graph::GetPath(const Position & a, const Position & b, int * pLength) const
 {
-	const Area * pAreaA = GetNearestArea(WalkPosition(a));
-	const Area * pAreaB = GetNearestArea(WalkPosition(b));
+	const Area * pAreaA = GetNearestArea<0>(WalkPosition(a));
+	const Area * pAreaB = GetNearestArea<0>(WalkPosition(b));
 
 	if (pAreaA == pAreaB)
 	{
@@ -489,18 +489,18 @@ void Graph::CollectInformation()
 {
 	// 1) Process the whole Map:
 
-	for (auto & m : GetMap()->Minerals())
-		if (Area * pArea = mainArea(GetMap(), m->TopLeft(), m->Size()))
+	for (auto & m : m_pMap->Minerals())
+		if (Area * pArea = mainArea(m_pMap, m->TopLeft(), m->Size()))
 			pArea->AddMineral(m.get());
 
-	for (auto & g : GetMap()->Geysers())	
-		if (Area * pArea = mainArea(GetMap(), g->TopLeft(), g->Size()))
+	for (auto & g : m_pMap->Geysers())
+		if (Area * pArea = mainArea(m_pMap, g->TopLeft(), g->Size()))
 			pArea->AddGeyser(g.get());
 
-	for (int y = 0 ; y < GetMap()->Size().y ; ++y)
-	for (int x = 0 ; x < GetMap()->Size().x ; ++x)
+	for (int y = 0 ; y < m_pMap->Size().y ; ++y)
+	for (int x = 0 ; x < m_pMap->Size().x ; ++x)
 	{
-		const Tile & tile = GetMap()->GetTile(TilePosition(x, y));
+		const Tile & tile = m_pMap->GetTile(TilePosition(x, y));
 		if (tile.AreaId() > 0)
 			GetArea(tile.AreaId())->AddTileInformation(TilePosition(x, y), tile);
 	}

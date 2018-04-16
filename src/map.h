@@ -288,7 +288,6 @@ inline TPosition Map::BreadthFirstSearch(TPosition start, Pred1 findCond, Pred2 
 		}
 	}
 
-	bwem_assert(false);
 	return start;
 }
 
