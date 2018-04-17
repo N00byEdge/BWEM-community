@@ -39,7 +39,7 @@ add_library(googletest
 
 
 file(GLOB bwemSources
-  ${PROJECT_SOURCE_DIR}/src/*.cpp
+  ${PROJECT_SOURCE_DIR}/BWEM/src/*.cpp
 )
 add_library(BWEBlib
   ${bwemSources}
@@ -59,7 +59,7 @@ add_executable(tests
   ${testsources}
 )
 include_directories(
-  ${PROJECT_SOURCE_DIR}/src
+  ${PROJECT_SOURCE_DIR}/BWEM/src
   ${PROJECT_SOURCE_DIR}/external/bwapi/bwapi/include
 )
 

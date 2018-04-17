@@ -1,0 +1,25 @@
+version: 1.0.{build}-{branch}
+
+image: Visual Studio 2017
+
+shallow_clone: false
+clone_depth: 5
+
+install:
+  - git submodule update --init --recursive
+  - nuget restore
+
+build:
+  project: BWEM.sln
+  parallel: true
+
+platform: x86
+
+configuration:
+  - Release
+  - Debug
+
+test_script:
+  - sh: ./tests --gtest_output=xml:"tests.xml"
+  - cmd: '%CONFIGURATION%\Tests.exe --gtest_output=xml:"tests.xml"'
+  - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\tests.xml))

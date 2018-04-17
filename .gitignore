@@ -31,3 +31,8 @@
 *.out
 *.app
 /.vs
+*/Debug/*
+Debug*
+*/Release/*
+Release*
+packages/*
