@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(BWEM)
 
 enable_language(CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/bwapi/CMake/BWAPI)
 
@@ -14,8 +16,10 @@ ELSE()
     SET(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
 ENDIF()
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -fsanitize=address,undefined -Wall -Wno-mismatched-tags -Wno-sign-compare -pthread -fuse-ld=gold")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+if (!MSVC)
+	set(CMAKE_CXX_FLAGS "-fsanitize=address,undefined -Wall -pthread -fuse-ld=gold")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+endif()
 
 include_directories(
   ${PROJECT_SOURCE_DIR}/external/bwapi/bwapi/include
