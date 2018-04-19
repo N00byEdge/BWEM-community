@@ -10,7 +10,7 @@ environment:
     secure: pXIJzmDBCbR+oFPGeg3izuhDCv/rRSdtJd6wHSfQXuU=
 
 install:
-  - ps: git submodule update --init --recursive
+  - git submodule update --init --recursive
   - ps: >-
       if($isWindows) {
         nuget restore
