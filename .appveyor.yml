@@ -16,12 +16,12 @@ install:
         nuget restore
       }
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/BrooDat.mpq.enc' -OutFile 'C:/projects/bwem-community/BrooDat.mpq.enc'
-  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/StarDat.mpq.enc' -OutFile 'C:/projects/bwem-community/StarDat.mpq.enc'
-  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/patch_rt.mpq.enc' -OutFile 'C:/projects/bwem-community/patch_rt.mpq.enc'
-  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/BrooDat.mpq.enc -secret %mpq_decryption_key%
-  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/StarDat.mpq.enc -secret %mpq_decryption_key%
-  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/patch_rt.mpq.enc -secret %mpq_decryption_key%
+  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/BrooDat.mpq.enc' -OutFile 'C:/projects/bwem-community/%CONFIGURATION%/BrooDat.mpq.enc'
+  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/StarDat.mpq.enc' -OutFile 'C:/projects/bwem-community/%CONFIGURATION%/StarDat.mpq.enc'
+  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/patch_rt.mpq.enc' -OutFile 'C:/projects/bwem-community/%CONFIGURATION%/patch_rt.mpq.enc'
+  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/%CONFIGURATION%/BrooDat.mpq.enc -secret %mpq_decryption_key%
+  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/%CONFIGURATION%/StarDat.mpq.enc -secret %mpq_decryption_key%
+  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/%CONFIGURATION%/patch_rt.mpq.enc -secret %mpq_decryption_key%
 
 build:
   project: BWEM.sln
@@ -34,6 +34,8 @@ configuration:
   - Debug
 
 test_script:
+  - ps: pushd %CONFIGURATION%
   - sh: ./tests --gtest_output=xml:"tests.xml"
   - cmd: '%CONFIGURATION%\Tests.exe --gtest_output=xml:"tests.xml"'
   - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\tests.xml))
+  - ps: popd
