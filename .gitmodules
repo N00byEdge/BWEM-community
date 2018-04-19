@@ -1,7 +1,10 @@
 [submodule "external/googletest"]
 	path = external/googletest
 	url = https://github.com/google/googletest/
-[submodule "external/bwapi"]
-	path = external/bwapi
-	url = https://github.com/bwapi/bwapi/
-	branch = develop
+[submodule "external/openbw-bwapi"]
+	path = external/openbw-bwapi
+	url = https://github.com/kant2002/bwapi
+	branch = develop-openbw
+[submodule "external/openbw"]
+	path = external/openbw
+	url = https://github.com/OpenBW/openbw

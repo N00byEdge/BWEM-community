@@ -206,4 +206,27 @@ public:
 	bool setRevealAll(bool reveal = true) { return true; }
 
 	unsigned getRandomSeed() const { return 0U; }
+	void setCharacterName(const std::string& name) {}
+	void setGameType(BWAPI::GameType gameType) {}
+	void setAIModule(BWAPI::AIModule* module) {}
+	void createSinglePlayerGame(std::function<void()> setupFunction) {}
+	void createMultiPlayerGame(std::function<void()> setupFunction) {}
+	void startGame() {}
+	void switchToPlayer(BWAPI::Player p) {}
+	int connectedPlayerCount() { return 0; }
+	BWAPI::Unit createUnit(BWAPI::Player player, BWAPI::UnitType type, BWAPI::Position pos) {
+		return nullptr;
+	}
+	void killUnit(BWAPI::Unit u) {}
+	void removeUnit(BWAPI::Unit u) {}
+	void saveSnapshot(std::string id) {}
+	void loadSnapshot(const std::string& id) {}
+	void deleteSnapshot(const std::string& id) {}
+	std::vector<std::string> listSnapshots() { return std::vector<std::string>(); }
+	void setRandomSeed(uint32_t value) {}
+	void disableTriggers() {}
+	BWAPI::Position getScreenSize() const { return BWAPI::Positions::None; }
+	std::tuple<int, int, uint32_t*> drawGameScreen(int x, int y, int width, int height) {
+		return std::make_tuple(0, 0, nullptr);
+	}
 };

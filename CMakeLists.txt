@@ -6,20 +6,28 @@ enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/bwapi/CMake/BWAPI)
+set(OPENBW_DIR ${PROJECT_SOURCE_DIR}/external/openbw)
 
-IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    SET(BWAPI_LIB_NAME "BWAPI-Staticd")
-    SET(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
-ELSE()
-    SET(BWAPI_LIB_NAME "BWAPI-Static")
-    SET(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
-ENDIF()
-
+include_directories(
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/include
+)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPILib)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/OpenBWData)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPICore)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPI)
+include_directories(
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/Util/Source
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/BWAPI/openbw
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/BWAPI/openbw/BWAPI
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/BWAPI/Source/BWAPI
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/BWAPI/Source
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/BWAPICore
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/Shared
+)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}/BWEM/include
-  ${PROJECT_SOURCE_DIR}/external/bwapi/bwapi/include
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/include
 )
 
 set(GOOGLETEST_ROOT
@@ -48,31 +56,39 @@ add_library(BWEBlib
   ${bwemSources}
 )
 target_link_libraries(BWEBlib
-  ${BWAPI_LIB_NAME}
+  BWAPILIB
 )
 
+
+include_directories(
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPI/Source
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPICore
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/OpenBWData
+  ${PROJECT_SOURCE_DIR}/external/openbw
+  ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}
+  ${PROJECT_SOURCE_DIR}/${GOOGLETEST_ROOT}/include
+)
 
 file(GLOB testsources
 	#${GOOGLETEST_SOURCES}
   ${PROJECT_SOURCE_DIR}/tests/*.cpp
 )
-
-
+add_library(BWData ALIAS OpenBWData)
 add_executable(tests
   ${testsources}
-)
-include_directories(
-  ${PROJECT_SOURCE_DIR}/BWEM/src
-  ${PROJECT_SOURCE_DIR}/external/bwapi/bwapi/include
+  $<TARGET_OBJECTS:BWAPIObj>
+  $<TARGET_OBJECTS:BWAPICore>
+  ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/OpenBWData/BW/BWData.cpp
 )
 
 target_link_libraries(tests
   googletest
   BWEBlib
-  ${BWAPI_LIB_NAME}
+  BWAPILIB
 )
 
 include(CTest)
 enable_testing()
 
 add_test(unit ${PROJECT_BINARY_DIR}/tests)
+file(COPY Tests/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
