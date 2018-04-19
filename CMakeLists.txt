@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(BWEM)
 
 enable_language(CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/bwapi/CMake/BWAPI)
 
@@ -16,6 +18,7 @@ ENDIF()
 
 
 include_directories(
+  ${PROJECT_SOURCE_DIR}/BWEM/include
   ${PROJECT_SOURCE_DIR}/external/bwapi/bwapi/include
 )
 
