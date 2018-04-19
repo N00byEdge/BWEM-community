@@ -17,8 +17,6 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <NugetPackagesFolder Condition="'$(NugetPackagesFolder)'=='' and '$(Nuget_Packages)'==''">..\packages</NugetPackagesFolder>
-    <NugetPackagesFolder Condition="'$(NugetPackagesFolder)'=='' and '$(Nuget_Packages)'!=''">$(Nuget_Packages)</NugetPackagesFolder>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -35,23 +33,96 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.h" />
     <ClInclude Include="DummyBWAPIMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPICore\APMCounter.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPICore\FPSCounter.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\AIModule.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\BroodwarOutputDevice.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\BulletType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\BWAPI.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Color.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\DamageType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Error.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Event.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\ExplosionType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Filters.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Forceset.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Game.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\GameType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Order.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Player.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Playerset.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\PlayerType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Position.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Race.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Region.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Regionset.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Streams.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\TechType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Unit.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UnitCommandType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Unitset.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UnitSizeType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UnitType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UpgradeType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\WeaponType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\UnitCommand.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\AutoMenuManager.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\BulletImpl.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\BWtoBWAPI.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\CommandOptimizer.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\ForceImpl.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameBullets.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameCommands.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameDrawing.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameEvents.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameImpl.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameInternals.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameMenu.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameUnits.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\Map.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\PlayerImpl.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\RegionImpl.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\Server.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\UnitImpl.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\UnitUpdate.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\Bitmap.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\CheatType.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\OrderTypes.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\PositionUnitTarget.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\UnitTarget.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\Config.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\GameUpdate.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\Graphics.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\WMode.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\BulletShared.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\ForceShared.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\GameShared.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\PlayerShared.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\RegionShared.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\UnitShared.cpp" />
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Util\Source\Util\Sha1.cpp" />
     <ClCompile Include="MapInitialization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BWEM\BWEM.vcxproj">
       <Project>{ee73b286-b35d-4387-9eea-5b8c5192d068}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\external\bwapi\bwapi\BWAPILIB\BWAPILIB.vcxproj">
-      <Project>{843656fd-9bfd-47bf-8460-7bfe9710ea2c}</Project>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\maps\(2)Showdown.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(NugetPackagesFolder)\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" />
+    <Import Project="..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" />
   </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -59,17 +130,17 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>GTEST_HAS_TR1_TUPLE=0;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GTEST_HAS_TR1_TUPLE=0;WIN32;NOMINMAX;DEBUG_NEW;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../external/bwapi/bwapi/include;../BWEM/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/openbw-bwapi/bwapi/include;../external/openbw-bwapi/bwapi/Util/Source;../external/openbw-bwapi/bwapi/Shared;../external/openbw-bwapi/bwapi/BWAPI/Source;../external/openbw-bwapi/bwapi/OpenBWData;../external/openbw-bwapi/bwapi/BWAPICore;../external/openbw-bwapi/bwapi/BWAPI/Source/BWAPI;../external/openbw;../BWEM/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>BWAPILib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,24 +148,24 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <PreprocessorDefinitions>GTEST_HAS_TR1_TUPLE=0;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GTEST_HAS_TR1_TUPLE=0;WIN32;NOMINMAX;DEBUG_NEW;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../external/bwapi/bwapi/include;../BWEM/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/openbw-bwapi/bwapi/include;../external/openbw-bwapi/bwapi/Util/Source;../external/openbw-bwapi/bwapi/Shared;../external/openbw-bwapi/bwapi/BWAPI/Source;../external/openbw-bwapi/bwapi/OpenBWData;../external/openbw-bwapi/bwapi/BWAPICore;../external/openbw-bwapi/bwapi/BWAPI/Source/BWAPI;../external/openbw;../BWEM/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>BWAPILib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(NugetPackagesFolder)\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.0\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))" />
   </Target>
 </Project>

@@ -7,15 +7,248 @@
     <Filter Include="Tests">
       <UniqueIdentifier>{1608c241-628d-44e8-a6f9-143aab455460}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OpenBWData">
+      <UniqueIdentifier>{1608c241-628d-44e8-a6f9-143aab455461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BWAPIObj">
+      <UniqueIdentifier>{1608c241-628d-44e8-a6f9-143aab455462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BWAPICore">
+      <UniqueIdentifier>{1608c241-628d-44e8-a6f9-143aab455463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BWAPILib">
+      <UniqueIdentifier>{695eef00-431d-478a-bdfb-2bb6f819b4d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{1b8bde87-4576-48c6-aad8-fd58716af7a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\maps">
+      <UniqueIdentifier>{86570007-51be-4dd8-b175-f5f2315f69db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DummyBWAPIMap.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.h">
+      <Filter>OpenBWData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapInitialization.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.cpp">
+      <Filter>OpenBWData</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\Config.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\GameUpdate.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\Graphics.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\WMode.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\Bitmap.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\CheatType.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\PositionUnitTarget.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\AutoMenuManager.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\BulletImpl.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\BWtoBWAPI.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\CommandOptimizer.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\ForceImpl.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameBullets.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameCommands.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameDrawing.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameEvents.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameImpl.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameInternals.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameMenu.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\GameUnits.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\Map.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\PlayerImpl.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\RegionImpl.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\Server.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\UnitImpl.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BWAPI\UnitUpdate.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Util\Source\Util\Sha1.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\BulletShared.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\ForceShared.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\GameShared.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\PlayerShared.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\RegionShared.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\UnitShared.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\UnitCommand.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\AIModule.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\BroodwarOutputDevice.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\BulletType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\BWAPI.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Color.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\DamageType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Error.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Event.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\ExplosionType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Filters.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Forceset.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Game.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\GameType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Order.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Player.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Playerset.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\PlayerType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Position.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Race.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Region.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Regionset.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Streams.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\TechType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Unit.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UnitCommandType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\Unitset.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UnitSizeType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UnitType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\UpgradeType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPILIB\Source\WeaponType.cpp">
+      <Filter>BWAPILib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPICore\APMCounter.cpp">
+      <Filter>BWAPICore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPICore\FPSCounter.cpp">
+      <Filter>BWAPICore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\OrderTypes.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\UnitTarget.cpp">
+      <Filter>BWAPIObj</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\maps\(2)Showdown.scx">
+      <Filter>data\maps</Filter>
+    </None>
   </ItemGroup>
 </Project>
