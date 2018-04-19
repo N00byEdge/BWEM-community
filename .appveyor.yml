@@ -41,4 +41,3 @@ test_script:
   - sh: ./tests --gtest_output=xml:"tests.xml"
   - cmd: 'Tests.exe --gtest_output=xml:"tests.xml"'
   - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\tests.xml))
-  - cmd: popd
