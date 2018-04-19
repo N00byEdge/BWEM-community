@@ -15,6 +15,8 @@ install:
       if($isWindows) {
         nuget restore
       }
+
+before_test:
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/BrooDat.mpq.enc' -OutFile 'C:/projects/bwem-community/%CONFIGURATION%/BrooDat.mpq.enc'
   - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/StarDat.mpq.enc' -OutFile 'C:/projects/bwem-community/%CONFIGURATION%/StarDat.mpq.enc'
@@ -36,6 +38,6 @@ configuration:
 test_script:
   - ps: pushd %CONFIGURATION%
   - sh: ./tests --gtest_output=xml:"tests.xml"
-  - cmd: '%CONFIGURATION%\Tests.exe --gtest_output=xml:"tests.xml"'
+  - cmd: 'Tests.exe --gtest_output=xml:"tests.xml"'
   - ps: (new-object net.webclient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\tests.xml))
   - ps: popd
