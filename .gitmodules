@@ -3,5 +3,5 @@
 	url = https://github.com/google/googletest/
 [submodule "external/bwapi"]
 	path = external/bwapi
-	url = https://github.com/N00byEdge/bwapi/
+	url = https://github.com/bwapi/bwapi/
 	branch = develop
