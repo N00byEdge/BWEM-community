@@ -1,6 +1,6 @@
 # BWEM-community
 
-[![Build status](https://ci.appveyor.com/api/projects/status/6do734d9cdi31vvl?svg=true)](https://ci.appveyor.com/project/N00byEdge/bwem-community)
+[![Build status](https://ci.appveyor.com/api/projects/status/6do734d9cdi31vvl/branch/master?svg=true)](https://ci.appveyor.com/project/N00byEdge/bwem-community/branch/master)
 
 Brood War Easy Map is a C++ library that analyses Brood War's maps and provides relevant information such as areas, choke points and bases. It is built on top of the BWAPI library (http://bwapi.github.io/index.html). It first aims at simplifying the development of bots for Brood War, but can be used for any task requiring high level map information.
 
