@@ -20,7 +20,7 @@ On Windows
 
 ## Development
 
-Set environment variable `OPENBW_MPQ_PATH` to point to location of Starcraft, or folder where Starcraft files `StarDat.mpq`, `BrooDat.mpq`, `patch_rt.mpq` is located.
+Set environment variable `OPENBW_MPQ_PATH` to point to location of Starcraft, or folder where Starcraft files `StarDat.mpq`, `BrooDat.mpq`, `Patch_rt.mpq` is located.
 
 ### Using command line
 
