@@ -16,7 +16,7 @@ On Windows
 	- Microsoft Test Adapter for Google Test (for running tests inside VS)
 	- CMake support (by preference)
 
-- Starcraft installed or just 3 MPQ files from original Starcraft `StarDat.mpq`, `BrooDat.mpq`, `patch_rt.mpq`
+- Starcraft installed or just 3 MPQ files from original Starcraft `StarDat.mpq`, `BrooDat.mpq`, `Patch_rt.mpq`
 
 ## Development
 
