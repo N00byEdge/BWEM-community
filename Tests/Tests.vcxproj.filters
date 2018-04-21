@@ -33,6 +33,9 @@
     <ClInclude Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.h">
       <Filter>OpenBWData</Filter>
     </ClInclude>
+    <ClInclude Include="MapTest.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapInitialization.cpp">

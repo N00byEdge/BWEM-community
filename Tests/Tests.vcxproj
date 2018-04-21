@@ -34,6 +34,7 @@
   <ItemGroup>
     <ClInclude Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.h" />
     <ClInclude Include="DummyBWAPIMap.h" />
+    <ClInclude Include="MapTest.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPICore\APMCounter.cpp" />
