@@ -245,6 +245,12 @@
     <ClCompile Include="..\external\openbw-bwapi\bwapi\BWAPI\Source\BW\UnitTarget.cpp">
       <Filter>BWAPIObj</Filter>
     </ClCompile>
+    <ClCompile Include="MapBasesInfo.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapResourcesInfo.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\maps\(2)Showdown.scx">
