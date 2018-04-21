@@ -105,7 +105,9 @@
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\RegionShared.cpp" />
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\UnitShared.cpp" />
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Util\Source\Util\Sha1.cpp" />
+    <ClCompile Include="MapBasesInfo.cpp" />
     <ClCompile Include="MapInitialization.cpp" />
+    <ClCompile Include="MapResourcesInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BWEM\BWEM.vcxproj">
