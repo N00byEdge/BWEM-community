@@ -1,6 +1,5 @@
 #include "bwem.h"
 #include "mapImpl.h"
-#include "DummyBWAPIMap.h"
 #include "MapTest.hpp"
 
 #include "gtest/gtest.h"
@@ -12,15 +11,6 @@ TEST(MapInitialization, MapInitiallyNotInitialized) {
 }
 
 TEST(MapInitialization, MapInitialized) {
-	BWEM::detail::MapImpl map;
-
-	DummyBWAPIMap dummyMap;
-
-	map.Initialize(&dummyMap);
-	EXPECT_EQ(true, map.Initialized());
-}
-
-TEST(MapInitialization, MapInitializedUsingOpenBW) {
   BWEM::detail::MapImpl map;
 
   runOnMap("data/maps/(2)Showdown.scx", [&](auto game) {
