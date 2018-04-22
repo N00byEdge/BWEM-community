@@ -108,7 +108,9 @@
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Util\Source\Util\Sha1.cpp" />
     <ClCompile Include="MapBasesInfo.cpp" />
     <ClCompile Include="MapInitialization.cpp" />
+    <ClCompile Include="MapParameters.cpp" />
     <ClCompile Include="MapResourcesInfo.cpp" />
+    <ClCompile Include="TestingData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BWEM\BWEM.vcxproj">
@@ -117,6 +119,66 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\maps\(2)Showdown.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(2)Benzene.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(2)Destination.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(2)Heartbreak Ridge.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(3)Neo Moon Glaive.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(3)Tau Cross.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Andromeda.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Circuit Breaker.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Electric Circuit.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Empire of the Sun.scm">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Fighting Spirit.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Icarus.scm">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Jade.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)La Mancha1.1.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Python.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\sscai\(4)Roadrunner.scx">
       <DeploymentContent>true</DeploymentContent>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
