@@ -3,6 +3,14 @@
 #include "BWAPI/GameImpl.h"
 #include "BW/BWData.h"
 
+extern std::vector<std::string> mapsForTest;
+extern std::vector<std::pair<int, int>> mapTileDimensions;
+extern std::vector<std::pair<int, int>> mapWalkDimensions;
+
+extern std::vector<std::string> sscaitMaps;
+extern std::vector<std::pair<int, int>> sscaitMapTileDimensions;
+extern std::vector<std::pair<int, int>> sscaitMapWalkDimensions;
+
 template<typename Functor> void runOnMap(std::string const &mapName, Functor f) {
   BW::GameOwner gameOwner;
 
