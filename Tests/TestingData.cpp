@@ -1,15 +1,35 @@
 #include <vector>
 
 std::vector<std::string> mapsForTest = {
-	"data/maps/(2)Showdown.scx"
+	"data/maps/(2)Showdown.scx",
+	"data/maps/onlywater.scm",
+	"data/maps/onlydirt.scm",
 };
 
 std::vector<std::pair<int, int>> mapTileDimensions = {
-	{ 64, 192 }
+	{ 64, 192 },
+	{ 128, 128 },
+	{ 128, 128 },
 };
 
 std::vector<std::pair<int, int>> mapWalkDimensions = {
-	{ 256, 768 }
+	{ 256, 768 },
+	{ 512, 512 },
+	{ 512, 512 },
+};
+
+std::vector<std::pair<int, int>> mapCenterPositions = {
+	{ 1024, 3072 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+};
+
+std::vector<std::pair<int, int>> mapAltitudeLimits = {
+	{ 0, 426 },
+	{ 0, 66 },		// Could not calculate this value manually. It seems very large for me.
+					// I have to probably create a too for dumping altitudes in the txt file
+	{ 0, 2032 },	// This value = 2048 - 16, but should be 2048, since from both borders this is maximal distance to edges.
+					// how this become less then 2048 not clear for me.
 };
 
 std::vector<std::string> sscaitMaps = {
@@ -70,4 +90,44 @@ std::vector<std::pair<int, int>> sscaitMapWalkDimensions = {
 	{ 512, 512 },
 	{ 512, 512 },
 	{ 512, 512 },
+};
+
+std::vector<std::pair<int, int>> sscaitMapCenterPositions = {
+	{ 2048, 1792 },
+	{ 1536, 2048 },
+	{ 2048, 1536 },
+
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+};
+
+std::vector<std::pair<int, int>> sscaitMapAltitudeLimits = {
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+
+	{ 0, 0 },
+	{ 0, 0 },
+
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
+	{ 0, 0 },
 };
