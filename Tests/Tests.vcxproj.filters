@@ -316,5 +316,11 @@
     <None Include="data\maps\sscai\(4)Roadrunner.scx">
       <Filter>External\data\maps\sscai</Filter>
     </None>
+    <None Include="data\maps\onlywater.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\onlydirt.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
   </ItemGroup>
 </Project>

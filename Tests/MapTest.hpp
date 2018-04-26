@@ -6,10 +6,14 @@
 extern std::vector<std::string> mapsForTest;
 extern std::vector<std::pair<int, int>> mapTileDimensions;
 extern std::vector<std::pair<int, int>> mapWalkDimensions;
+extern std::vector<std::pair<int, int>> mapCenterPositions;
+extern std::vector<std::pair<int, int>> mapAltitudeLimits;
 
 extern std::vector<std::string> sscaitMaps;
 extern std::vector<std::pair<int, int>> sscaitMapTileDimensions;
 extern std::vector<std::pair<int, int>> sscaitMapWalkDimensions;
+extern std::vector<std::pair<int, int>> sscaitMapCenterPositions;
+extern std::vector<std::pair<int, int>> sscaitMapAltitudeLimits;
 
 template<typename Functor> void runOnMap(std::string const &mapName, Functor f) {
   BW::GameOwner gameOwner;

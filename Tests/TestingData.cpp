@@ -1,15 +1,33 @@
 #include <vector>
 
 std::vector<std::string> mapsForTest = {
-	"data/maps/(2)Showdown.scx"
+	"data/maps/(2)Showdown.scx",
+	"data/maps/onlywater.scm",
+	"data/maps/onlydirt.scm",
 };
 
 std::vector<std::pair<int, int>> mapTileDimensions = {
-	{ 64, 192 }
+	{ 64, 192 },
+	{ 128, 128 },
+	{ 128, 128 },
 };
 
 std::vector<std::pair<int, int>> mapWalkDimensions = {
-	{ 256, 768 }
+	{ 256, 768 },
+	{ 512, 512 },
+	{ 512, 512 },
+};
+
+std::vector<std::pair<int, int>> mapCenterPositions = {
+	{ 1024, 3072 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+};
+
+std::vector<std::pair<int, int>> mapAltitudeLimits = {
+	{ 0, 426 },
+	{ 0, 66 },
+	{ 0, 2032 },
 };
 
 std::vector<std::string> sscaitMaps = {
@@ -70,4 +88,44 @@ std::vector<std::pair<int, int>> sscaitMapWalkDimensions = {
 	{ 512, 512 },
 	{ 512, 512 },
 	{ 512, 512 },
+};
+
+std::vector<std::pair<int, int>> sscaitMapCenterPositions = {
+	{ 2048, 1792 },
+	{ 1536, 2048 },
+	{ 2048, 1536 },
+
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+	{ 2048, 2048 },
+};
+
+std::vector<std::pair<int, int>> sscaitMapAltitudeLimits = {
+	{ 0, 488 },
+	{ 0, 483 },
+	{ 0, 454 },
+
+	{ 0, 429 },
+	{ 0, 478 },
+
+	{ 0, 392 },
+	{ 0, 659 },
+	{ 0, 347 },
+	{ 0, 444 },
+	{ 0, 493 },
+	{ 0, 458 },
+	{ 0, 640 },
+	{ 0, 408 },
+	{ 0, 1035 },
+	{ 0, 416 },
 };
