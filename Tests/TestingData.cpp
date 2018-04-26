@@ -26,10 +26,8 @@ std::vector<std::pair<int, int>> mapCenterPositions = {
 
 std::vector<std::pair<int, int>> mapAltitudeLimits = {
 	{ 0, 426 },
-	{ 0, 66 },		// Could not calculate this value manually. It seems very large for me.
-					// I have to probably create a too for dumping altitudes in the txt file
-	{ 0, 2032 },	// This value = 2048 - 16, but should be 2048, since from both borders this is maximal distance to edges.
-					// how this become less then 2048 not clear for me.
+	{ 0, 66 },
+	{ 0, 2032 },
 };
 
 std::vector<std::string> sscaitMaps = {
@@ -113,21 +111,21 @@ std::vector<std::pair<int, int>> sscaitMapCenterPositions = {
 };
 
 std::vector<std::pair<int, int>> sscaitMapAltitudeLimits = {
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
+	{ 0, 488 },
+	{ 0, 483 },
+	{ 0, 454 },
 
-	{ 0, 0 },
-	{ 0, 0 },
+	{ 0, 429 },
+	{ 0, 478 },
 
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
-	{ 0, 0 },
+	{ 0, 392 },
+	{ 0, 659 },
+	{ 0, 347 },
+	{ 0, 444 },
+	{ 0, 493 },
+	{ 0, 458 },
+	{ 0, 640 },
+	{ 0, 408 },
+	{ 0, 1035 },
+	{ 0, 416 },
 };

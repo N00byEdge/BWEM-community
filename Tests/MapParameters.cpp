@@ -16,63 +16,67 @@ typedef std::tuple<
 class MapDimensionsTest : public ::testing::TestWithParam<MapDimensionsTestParameters> {
 };
 
-TEST_P(MapDimensionsTest, VerifyTileSizeLoadedCorrectly) {
+TEST_P(MapDimensionsTest, VerifyDimensionsLoadedCorrectly) {
 	BWEM::detail::MapImpl map;
 
 	auto param = GetParam();
 	auto mapName = std::get<0>(param);
 	auto tileDimensions = std::get<1>(param);
-	runOnMap(mapName, [&](auto game) {
-		map.Initialize(game);
-	});
-
-	auto size = map.Size();
-	EXPECT_EQ(tileDimensions.first, size.x);
-	EXPECT_EQ(tileDimensions.second, size.y);
-}
-
-TEST_P(MapDimensionsTest, VerifyWalkSizeLoadedCorrectly) {
-	BWEM::detail::MapImpl map;
-
-	auto param = GetParam();
-	auto mapName = std::get<0>(param);
 	auto walkDimensions = std::get<2>(param);
-	runOnMap(mapName, [&](auto game) {
-		map.Initialize(game);
-	});
-
-	auto size = map.WalkSize();
-	EXPECT_EQ(walkDimensions.first, size.x);
-	EXPECT_EQ(walkDimensions.second, size.y);
-}
-
-TEST_P(MapDimensionsTest, VerifyCenterCalculatedCorrectly) {
-	BWEM::detail::MapImpl map;
-
-	auto param = GetParam();
-	auto mapName = std::get<0>(param);
 	auto expectedCenter = std::get<3>(param);
-	runOnMap(mapName, [&](auto game) {
-		map.Initialize(game);
-	});
-
-	auto center = map.Center();
-	EXPECT_EQ(expectedCenter.first, center.x);
-	EXPECT_EQ(expectedCenter.second, center.y);
-}
-
-TEST_P(MapDimensionsTest, DISABLED_VerifyMaxAltitudeCalculatedCorrectly) {
-	BWEM::detail::MapImpl map;
-
-	auto param = GetParam();
-	auto mapName = std::get<0>(param);
 	auto expectedMaxAltitude = std::get<4>(param);
 	runOnMap(mapName, [&](auto game) {
 		map.Initialize(game);
 	});
 
+	auto tileSize = map.Size();
+	EXPECT_EQ(tileDimensions.first, tileSize.x);
+	EXPECT_EQ(tileDimensions.second, tileSize.y);
+
+	auto walkSize = map.WalkSize();
+	EXPECT_EQ(walkDimensions.first, walkSize.x);
+	EXPECT_EQ(walkDimensions.second, walkSize.y);
+
+	auto center = map.Center();
+	EXPECT_EQ(expectedCenter.first, center.x);
+	EXPECT_EQ(expectedCenter.second, center.y);
+
 	auto maxAltitude = map.MaxAltitude();
 	EXPECT_EQ(expectedMaxAltitude.second, maxAltitude);
+}
+
+TEST(AltitudeTest, VerifyAltitudeCalculatedCorrectly) {
+	BWEM::detail::MapImpl map;
+
+	auto mapName = "data/maps/onlydirt.scm";
+	runOnMap(mapName, [&](auto game) {
+		map.Initialize(game);
+	});
+
+	auto leftTopCorner = map.GetMiniTile(BWAPI::WalkPosition(0, 0));
+	EXPECT_EQ(8, leftTopCorner.Altitude());
+	auto nearLeftTopCorner = map.GetMiniTile(BWAPI::WalkPosition(1, 1));
+	EXPECT_EQ(16, nearLeftTopCorner.Altitude());
+
+	// Around edge of the map in the bottom, there non walkable and non-accessible area
+	// which is covered by the UI. That's why we don't have simple formula for calculation
+	// altitude on trivial maps.
+	auto nearRightBottomCorner = map.GetMiniTile(BWAPI::WalkPosition(510, 510));
+	EXPECT_EQ(0, nearRightBottomCorner.Altitude());
+	auto rightBottomCorner = map.GetMiniTile(BWAPI::WalkPosition(511, 511));
+	EXPECT_EQ(0, rightBottomCorner.Altitude());
+
+	// This is first walkable area not hidden by the UI
+	// This is first in sense that if you find closest non-walkcable area hidden by UI
+	// then if continue in the next direction closer to center.
+	auto farRightBottomPosition = map.GetMiniTile(BWAPI::WalkPosition(491, 506));
+	EXPECT_EQ(8, farRightBottomPosition.Altitude());
+
+	auto maxAltitudePoint = map.GetMiniTile(BWAPI::WalkPosition(254, 254));
+	EXPECT_EQ(2032, maxAltitudePoint.Altitude());
+
+	auto mapCenter = map.GetMiniTile(BWAPI::WalkPosition(255, 255));
+	EXPECT_EQ(2024, mapCenter.Altitude());
 }
 
 std::vector<MapDimensionsTestParameters> getTestData(
