@@ -106,6 +106,7 @@
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\RegionShared.cpp" />
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Shared\UnitShared.cpp" />
     <ClCompile Include="..\external\openbw-bwapi\bwapi\Util\Source\Util\Sha1.cpp" />
+    <ClCompile Include="BaseResourcesAsignment.cpp" />
     <ClCompile Include="MapBasesInfo.cpp" />
     <ClCompile Include="MapInitialization.cpp" />
     <ClCompile Include="MapParameters.cpp" />
@@ -119,6 +120,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\maps\(2)Showdown.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\geysers_only_bases.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\mineral_only_bases.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\no_base_around_small_minerals.scx">
       <DeploymentContent>true</DeploymentContent>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -187,6 +200,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\maps\sscai\(4)Roadrunner.scx">
+      <DeploymentContent>true</DeploymentContent>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\maps\start_location_wihout_base.scx">
       <DeploymentContent>true</DeploymentContent>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

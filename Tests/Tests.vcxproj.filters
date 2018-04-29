@@ -266,6 +266,9 @@
     <ClCompile Include="MapParameters.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="BaseResourcesAsignment.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\maps\(2)Showdown.scx">
@@ -320,6 +323,18 @@
       <Filter>External\data\maps</Filter>
     </None>
     <None Include="data\maps\onlydirt.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\mineral_only_bases.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\geysers_only_bases.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\start_location_wihout_base.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\no_base_around_small_minerals.scx">
       <Filter>External\data\maps</Filter>
     </None>
   </ItemGroup>
