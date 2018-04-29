@@ -334,7 +334,7 @@
     <None Include="data\maps\resources_smallamount.scm">
       <Filter>External\data\maps</Filter>
     </None>
-     <None Include="data\maps\mineral_only_bases.scx">
+    <None Include="data\maps\mineral_only_bases.scx">
       <Filter>External\data\maps</Filter>
     </None>
     <None Include="data\maps\geysers_only_bases.scx">
