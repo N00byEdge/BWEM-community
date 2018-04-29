@@ -325,6 +325,15 @@
     <None Include="data\maps\onlydirt.scm">
       <Filter>External\data\maps</Filter>
     </None>
+    <None Include="data\maps\resources.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\resources_usual.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\resources_smallamount.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
     <None Include="data\maps\mineral_only_bases.scx">
       <Filter>External\data\maps</Filter>
     </None>
