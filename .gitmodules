@@ -3,7 +3,7 @@
 	url = https://github.com/google/googletest/
 [submodule "external/openbw-bwapi"]
 	path = external/openbw-bwapi
-	url = https://github.com/kant2002/bwapi
+	url = https://github.com/openbw/bwapi
 	branch = develop-openbw
 [submodule "external/openbw"]
 	path = external/openbw
