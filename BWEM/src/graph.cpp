@@ -176,7 +176,7 @@ void Graph::CreateChokePoints()
 			for (const Area * pA : BlockedAreas)
 			for (const Area * pB : BlockedAreas)
 			{
-				if (pB == pA) break;	// breaks symmetry
+				if (pB == pA || !pA || !pB) break;	// breaks symmetry
 
 				auto center = GetMap()->BreadthFirstSearch(WalkPosition(pNeutral->Pos()),
 						[](const MiniTile & miniTile, WalkPosition) { return miniTile.Walkable(); },	// findCond
