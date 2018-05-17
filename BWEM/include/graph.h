@@ -133,7 +133,7 @@ private:
 template<class TPosition>
 const Area * Graph::GetNearestArea(TPosition p) const
 {
-	typedef typename TileOfPosition<TPosition>::type Tile_t;
+	typedef typename BWEM::utils::TileOfPosition<TPosition>::type Tile_t;
 	if (const Area * area = GetArea(p)) return area;
 
 	p = GetMap()->BreadthFirstSearch(p,
