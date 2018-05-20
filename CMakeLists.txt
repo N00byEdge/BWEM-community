@@ -5,6 +5,7 @@ project(BWEM)
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(OPENBW_DIR ${PROJECT_SOURCE_DIR}/external/openbw)
 
@@ -55,6 +56,11 @@ file(GLOB bwemSources
 add_library(BWEBlib
   ${bwemSources}
 )
+
+if(MSVC)
+	target_compile_options(BWEBlib PUBLIC "/permissive-")
+endif()
+
 target_link_libraries(BWEBlib
   BWAPILIB
 )
