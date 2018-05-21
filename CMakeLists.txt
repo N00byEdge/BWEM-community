@@ -12,7 +12,7 @@ set(OPENBW_DIR ${PROJECT_SOURCE_DIR}/external/openbw)
 include_directories(
   ${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/include
 )
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPILib)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPILIB)
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/OpenBWData)
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPICore)
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/openbw-bwapi/bwapi/BWAPI)
