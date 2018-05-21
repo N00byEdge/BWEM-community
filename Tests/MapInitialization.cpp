@@ -5,6 +5,10 @@
 
 #include "gtest/gtest.h"
 
+class MapInitializationInfo : public ::testing::TestWithParam<std::string> {
+};
+
+
 TEST(MapInitialization, MapInitiallyNotInitialized) {
 	BWEM::detail::MapImpl map;
 
@@ -20,12 +24,21 @@ TEST(MapInitialization, MapInitialized) {
 	EXPECT_EQ(true, map.Initialized());
 }
 
-TEST(MapInitialization, MapInitializedUsingOpenBW) {
-  BWEM::detail::MapImpl map;
+TEST_P(MapInitializationInfo, MapInitializedUsingOpenBW) {
+	BWEM::detail::MapImpl map;
 
-  runOnMap("data/maps/(2)Showdown.scx", [&](auto game) {
-    map.Initialize(game);
-  });
+	auto mapName = GetParam();
+	runOnMap(mapName, [&](auto game) {
+		map.Initialize(game);
+	});
 
 	EXPECT_EQ(true, map.Initialized());
 }
+
+INSTANTIATE_TEST_CASE_P(
+	SynteticCheck,
+	MapInitializationInfo,
+	::testing::Values(
+		"data/maps/(2)Showdown.scx",
+		"data/maps/(4)Sparkle 1.1.scx"
+	));

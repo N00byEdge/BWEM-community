@@ -346,5 +346,8 @@
     <None Include="data\maps\no_base_around_small_minerals.scx">
       <Filter>External\data\maps</Filter>
     </None>
+    <None Include="data\maps\(4)Sparkle 1.1.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
   </ItemGroup>
 </Project>
