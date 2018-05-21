@@ -9,12 +9,16 @@
 
 #pragma once
 
+#include <math.h>
+
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <cstdint>
 #include <limits>
 #include <fstream>
+#include <sstream>
+
 #include "defs.h"
 
 namespace BWEM {
