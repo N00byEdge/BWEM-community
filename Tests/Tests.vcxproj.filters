@@ -28,6 +28,9 @@
     <Filter Include="Tests\Headers">
       <UniqueIdentifier>{e11eb597-86c8-4a94-bf10-47d67057f09d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="External\data\maps\sscai">
+      <UniqueIdentifier>{b03d845f-24eb-4ae5-ae40-37a96d430ae0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DummyBWAPIMap.h">
@@ -257,9 +260,90 @@
     <ClCompile Include="MapResourcesInfo.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="TestingData.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapParameters.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseResourcesAsignment.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\maps\(2)Showdown.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\sscai\(2)Benzene.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(2)Destination.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(2)Heartbreak Ridge.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(3)Neo Moon Glaive.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(3)Tau Cross.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Andromeda.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Circuit Breaker.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Electric Circuit.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Empire of the Sun.scm">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Fighting Spirit.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Icarus.scm">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Jade.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)La Mancha1.1.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Python.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\sscai\(4)Roadrunner.scx">
+      <Filter>External\data\maps\sscai</Filter>
+    </None>
+    <None Include="data\maps\onlywater.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\onlydirt.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\resources.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\resources_usual.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\resources_smallamount.scm">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\mineral_only_bases.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\geysers_only_bases.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\start_location_wihout_base.scx">
+      <Filter>External\data\maps</Filter>
+    </None>
+    <None Include="data\maps\no_base_around_small_minerals.scx">
       <Filter>External\data\maps</Filter>
     </None>
   </ItemGroup>

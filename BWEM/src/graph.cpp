@@ -40,6 +40,28 @@ Area * mainArea(MapImpl * pMap, TilePosition topLeft, TilePosition size)
 
 
 
+const Area * Graph::GetNearestArea(BWAPI::TilePosition t) const
+{
+	if (const Area * area = GetArea(t)) return area;
+
+	t = GetMap()->BreadthFirstSearch(t,
+		[this](const BWEM::Tile & t, BWAPI::TilePosition) { return t.AreaId() > 0; },	// findCond
+		[](const BWEM::Tile &, BWAPI::TilePosition) { return true; });			// visitCond
+
+	return GetArea(t);
+}
+
+const Area * Graph::GetNearestArea(BWAPI::WalkPosition w) const
+{
+	if (const Area * area = GetArea(w)) return area;
+
+	w = GetMap()->BreadthFirstSearch(w,
+		[this](const MiniTile & t, BWAPI::WalkPosition) { return t.AreaId() > 0; },	// findCond
+		[](const MiniTile &, BWAPI::WalkPosition) { return true; });			// visitCond
+
+	return GetArea(w);
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                          //
