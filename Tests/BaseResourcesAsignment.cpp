@@ -1,3 +1,4 @@
+#if 0
 #include "bwem.h"
 #include "mapImpl.h"
 
@@ -50,3 +51,4 @@ TEST(BaseResourcesAsignment, DISABLED_DontFormBasesAroundSmallMinerals) {
 	// Two regular locations and one mineral patch with 99 amount and 1% of life
 	EXPECT_EQ(2, map.BaseCount());
 }
+#endif

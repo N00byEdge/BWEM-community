@@ -32,6 +32,7 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="..\external\json\single_include\nlohmann\json.hpp" />
     <ClInclude Include="..\external\openbw-bwapi\bwapi\OpenBWData\BW\BWData.h" />
     <ClInclude Include="DummyBWAPIMap.h" />
     <ClInclude Include="MapTest.hpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="MapInitialization.cpp" />
     <ClCompile Include="MapParameters.cpp" />
     <ClCompile Include="MapResourcesInfo.cpp" />
+    <ClCompile Include="MapToJson.cpp" />
     <ClCompile Include="TestingData.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -236,7 +238,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../external/openbw-bwapi/bwapi/include;../external/openbw-bwapi/bwapi/Util/Source;../external/openbw-bwapi/bwapi/Shared;../external/openbw-bwapi/bwapi/BWAPI/Source;../external/openbw-bwapi/bwapi/OpenBWData;../external/openbw-bwapi/bwapi/BWAPICore;../external/openbw-bwapi/bwapi/BWAPI/Source/BWAPI;../external/openbw;../BWEM/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/openbw-bwapi/bwapi/include;../external/openbw-bwapi/bwapi/Util/Source;../external/openbw-bwapi/bwapi/Shared;../external/openbw-bwapi/bwapi/BWAPI/Source;../external/openbw-bwapi/bwapi/OpenBWData;../external/openbw-bwapi/bwapi/BWAPICore;../external/openbw-bwapi/bwapi/BWAPI/Source/BWAPI;../external/openbw;../BWEM/include;../external/json/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -253,7 +255,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../external/openbw-bwapi/bwapi/include;../external/openbw-bwapi/bwapi/Util/Source;../external/openbw-bwapi/bwapi/Shared;../external/openbw-bwapi/bwapi/BWAPI/Source;../external/openbw-bwapi/bwapi/OpenBWData;../external/openbw-bwapi/bwapi/BWAPICore;../external/openbw-bwapi/bwapi/BWAPI/Source/BWAPI;../external/openbw;../BWEM/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/openbw-bwapi/bwapi/include;../external/openbw-bwapi/bwapi/Util/Source;../external/openbw-bwapi/bwapi/Shared;../external/openbw-bwapi/bwapi/BWAPI/Source;../external/openbw-bwapi/bwapi/OpenBWData;../external/openbw-bwapi/bwapi/BWAPICore;../external/openbw-bwapi/bwapi/BWAPI/Source/BWAPI;../external/openbw;../BWEM/include;../external/json/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -31,6 +31,9 @@
     <Filter Include="External\data\maps\sscai">
       <UniqueIdentifier>{b03d845f-24eb-4ae5-ae40-37a96d430ae0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="External\nlohmann/json">
+      <UniqueIdentifier>{40b628c2-17fa-440e-ba0f-6264644b6c7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DummyBWAPIMap.h">
@@ -41,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="MapTest.hpp">
       <Filter>Tests\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\json\single_include\nlohmann\json.hpp">
+      <Filter>External\nlohmann/json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +273,9 @@
       <Filter>Tests</Filter>
     </ClCompile>
     <ClCompile Include="BaseResourcesAsignment.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToJson.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>

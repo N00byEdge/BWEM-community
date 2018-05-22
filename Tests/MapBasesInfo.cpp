@@ -1,3 +1,4 @@
+#if 0
 #include "bwem.h"
 #include "mapImpl.h"
 
@@ -34,3 +35,4 @@ TEST(MapBasesInfo, MapBaseCount) {
 	
 	EXPECT_EQ(8, map.BaseCount());
 }
+#endif

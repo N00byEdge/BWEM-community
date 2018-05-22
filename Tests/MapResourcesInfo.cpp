@@ -1,3 +1,4 @@
+#if 0
 #include "bwem.h"
 #include "mapImpl.h"
 
@@ -93,3 +94,4 @@ INSTANTIATE_TEST_CASE_P(
 		std::make_tuple("data/maps/sscai/(4)Python.scx", 12, 110),
 		std::make_tuple("data/maps/sscai/(4)Roadrunner.scx", 12, 96)
 	));
+#endif

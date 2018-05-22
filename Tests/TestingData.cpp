@@ -1,3 +1,4 @@
+#if 0
 #include <vector>
 
 std::vector<std::string> mapsForTest = {
@@ -129,3 +130,4 @@ std::vector<std::pair<int, int>> sscaitMapAltitudeLimits = {
 	{ 0, 1035 },
 	{ 0, 416 },
 };
+#endif

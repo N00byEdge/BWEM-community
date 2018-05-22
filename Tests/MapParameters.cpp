@@ -1,3 +1,4 @@
+#if 0
 #include <tuple>
 #include "bwem.h"
 #include "mapImpl.h"
@@ -127,3 +128,4 @@ INSTANTIATE_TEST_CASE_P(
 		sscaitMapWalkDimensions,
 		sscaitMapCenterPositions,
 		sscaitMapAltitudeLimits)));
+#endif
