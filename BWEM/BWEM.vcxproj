@@ -47,7 +47,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{EE73B286-B35D-4387-9EEA-5B8C5192D068}</ProjectGuid>
     <RootNamespace>BWEM</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
