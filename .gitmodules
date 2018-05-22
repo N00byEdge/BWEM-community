@@ -8,3 +8,6 @@
 [submodule "external/openbw"]
 	path = external/openbw
 	url = https://github.com/OpenBW/openbw
+[submodule "external/json"]
+	path = external/json
+	url = https://github.com/nlohmann/json
