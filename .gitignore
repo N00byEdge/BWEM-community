@@ -36,3 +36,6 @@ Debug*
 */Release/*
 Release*
 packages/*
+
+# CMake build folder
+build/
