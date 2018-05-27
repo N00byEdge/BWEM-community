@@ -12,6 +12,9 @@
 
 #include <cstdint>
 #include <string>
+#if BWEM_TRACE
+#include <iostream>
+#endif
 
 namespace BWEM
 {
@@ -23,8 +26,13 @@ namespace detail
 } // namespace details
 
 #ifdef BWEM_ASSERTS
+#include <cassert>
 #define bwem_assert_debug_only(expr)			assert(expr)
 #define bwem_assert_plus(expr, message)			assert(expr)
+#else
+#if BWEM_TRACE
+#define bwem_assert_plus(expr, message)			if(!(expr)) { std::cout << __FILE__ << ", line " << std::to_string(__LINE__) << " " << #expr << " - " << (message) << std::endl; }
+#define bwem_assert_debug_only(expr)			bwem_assert_plus(expr, "")
 #else
 #define bwem_assert_debug_only(expr)
 #define bwem_assert_plus(expr, message)
@@ -32,6 +40,7 @@ namespace detail
 #define bwem_assert(expr)						bwem_assert_plus(expr, "")
 #define bwem_assert_throw_plus(expr, message)   ((expr)?(void)0:detail::onAssertThrowFailed(__FILE__,__LINE__, #expr, message))
 #define bwem_assert_throw(expr)					bwem_assert_throw_plus(expr, "")
+#endif
 
 class Exception : public std::runtime_error
 {

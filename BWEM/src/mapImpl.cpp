@@ -216,7 +216,9 @@ void MapImpl::InitializeNeutrals(BWAPI::Game *game)
 			}
 			else
 			{
-				bwem_assert_throw(n->getType().isSpecialBuilding());
+				// Let's ignore buildings which are not special buildings.
+				// They should be destroyed as part of regular battle.
+				bwem_assert_plus(n->getType().isSpecialBuilding(), "Building " + n->getType().getName() + " at position " + my_to_string(n->getPosition()) + " is not special");
 				m_StaticBuildings.push_back(make_unique<StaticBuilding>(n, this));
 			}
 		}
@@ -230,7 +232,7 @@ void MapImpl::InitializeNeutrals(BWAPI::Game *game)
 				bwem_assert_plus(
 					n->getType() == Special_Pit_Door ||
 					n->getType() == Special_Right_Pit_Door ||
-					false, n->getType().getName());
+					false, "Unit " + n->getType().getName() + " at position " + my_to_string(n->getPosition()) + " is not XXX_Pit_Door");
 
 				if (n->getType() == Special_Pit_Door)
 					m_StaticBuildings.push_back(make_unique<StaticBuilding>(n, this));
