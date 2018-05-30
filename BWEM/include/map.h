@@ -210,6 +210,8 @@ public:
 	// Returns the union of the geometry of all the ChokePoints. Cf. ChokePoint::Geometry()
 	virtual const std::vector<std::pair<std::pair<Area::id, Area::id>, BWAPI::WalkPosition>> & RawFrontier() const = 0;
 
+  void Draw(BWAPI::Game *game) const;
+
 	virtual								~Map() = default;
 
 protected:
