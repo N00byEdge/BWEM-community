@@ -1,0 +1,1221 @@
+{
+    "altitude_limit": 493,
+    "bases": [
+        {
+            "center": [
+                "pixel",
+                288,
+                240
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        288,
+                        64
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        176
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        144
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        208
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        304
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        336
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        240
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        368
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        272
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        128,
+                        400
+                    ]
+                }
+            ],
+            "starting_location": true,
+            "tile_location": [
+                "tile",
+                7,
+                6
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                3808,
+                3792
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        3808,
+                        3616
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        3760
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        3920
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        3792
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        3728
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        3696
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        3824
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3968,
+                        3952
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        3888
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        3856
+                    ]
+                }
+            ],
+            "starting_location": true,
+            "tile_location": [
+                "tile",
+                117,
+                117
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                288,
+                3760
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        288,
+                        3584
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        3664
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        3696
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        3760
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        3728
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        3792
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        128,
+                        3920
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        3824
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        3856
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        3888
+                    ]
+                }
+            ],
+            "starting_location": true,
+            "tile_location": [
+                "tile",
+                7,
+                116
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                3808,
+                272
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        3808,
+                        96
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        240
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        176
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        304
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        208
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        272
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        336
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3968,
+                        432
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        400
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        368
+                    ]
+                }
+            ],
+            "starting_location": true,
+            "tile_location": [
+                "tile",
+                117,
+                7
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                2048,
+                2064
+            ],
+            "geysers": [
+                {
+                    "amount": 2985,
+                    "location": [
+                        "pixel",
+                        1792,
+                        2048
+                    ]
+                },
+                {
+                    "amount": 3207,
+                    "location": [
+                        "pixel",
+                        2304,
+                        2048
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 428,
+                    "location": [
+                        "pixel",
+                        1824,
+                        1936
+                    ]
+                },
+                {
+                    "amount": 1208,
+                    "location": [
+                        "pixel",
+                        2272,
+                        2224
+                    ]
+                },
+                {
+                    "amount": 593,
+                    "location": [
+                        "pixel",
+                        1856,
+                        2224
+                    ]
+                },
+                {
+                    "amount": 893,
+                    "location": [
+                        "pixel",
+                        1824,
+                        2192
+                    ]
+                },
+                {
+                    "amount": 329,
+                    "location": [
+                        "pixel",
+                        2336,
+                        2160
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2304,
+                        2128
+                    ]
+                },
+                {
+                    "amount": 196,
+                    "location": [
+                        "pixel",
+                        1824,
+                        2128
+                    ]
+                },
+                {
+                    "amount": 318,
+                    "location": [
+                        "pixel",
+                        2272,
+                        2000
+                    ]
+                },
+                {
+                    "amount": 1308,
+                    "location": [
+                        "pixel",
+                        1792,
+                        2000
+                    ]
+                },
+                {
+                    "amount": 1403,
+                    "location": [
+                        "pixel",
+                        2304,
+                        1936
+                    ]
+                },
+                {
+                    "amount": 537,
+                    "location": [
+                        "pixel",
+                        2272,
+                        1904
+                    ]
+                },
+                {
+                    "amount": 794,
+                    "location": [
+                        "pixel",
+                        1856,
+                        1904
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                62,
+                63
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                3808,
+                1712
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        3904,
+                        1888
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        1808
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        1776
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        1744
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        1712
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        1680
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4032,
+                        1616
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        4000,
+                        1584
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3936,
+                        1552
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                117,
+                52
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                288,
+                2352
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        256,
+                        2176
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        2352
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        2448
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        2480
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        2416
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        2320
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        64,
+                        2288
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        96,
+                        2224
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        128,
+                        2192
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                7,
+                72
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                2880,
+                464
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        2848,
+                        288
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2688,
+                        336
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2656,
+                        464
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2720,
+                        304
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2688,
+                        528
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2688,
+                        496
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2656,
+                        400
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2688,
+                        368
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                88,
+                13
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                1664,
+                240
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        1888,
+                        160
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1600,
+                        48
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1632,
+                        80
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1472,
+                        144
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1472,
+                        112
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1760,
+                        80
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1504,
+                        80
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1728,
+                        48
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1664,
+                        48
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                50,
+                6
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                512,
+                1264
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        480,
+                        1440
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        320,
+                        1360
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        352,
+                        1424
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        288,
+                        1328
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        320,
+                        1296
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        288,
+                        1264
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        320,
+                        1232
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        320,
+                        1200
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                14,
+                38
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                1216,
+                3632
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        1248,
+                        3808
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1408,
+                        3760
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1440,
+                        3728
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1376,
+                        3792
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1440,
+                        3664
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1408,
+                        3696
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1440,
+                        3600
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        1408,
+                        3568
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                36,
+                112
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                2464,
+                3824
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        2688,
+                        3904
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2432,
+                        3984
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2400,
+                        4016
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2336,
+                        4016
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2560,
+                        4016
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2272,
+                        3952
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2592,
+                        3984
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2464,
+                        4016
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        2304,
+                        3984
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                75,
+                118
+            ]
+        },
+        {
+            "center": [
+                "pixel",
+                3584,
+                2864
+            ],
+            "geysers": [
+                {
+                    "amount": 5000,
+                    "location": [
+                        "pixel",
+                        3616,
+                        2688
+                    ]
+                }
+            ],
+            "minerals": [
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3776,
+                        2736
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3776,
+                        2864
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3776,
+                        2960
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3808,
+                        2896
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3808,
+                        2832
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3808,
+                        2768
+                    ]
+                },
+                {
+                    "amount": 1500,
+                    "location": [
+                        "pixel",
+                        3744,
+                        2704
+                    ]
+                }
+            ],
+            "starting_location": false,
+            "tile_location": [
+                "tile",
+                110,
+                88
+            ]
+        }
+    ],
+    "center_position": [
+        "pixel",
+        2048,
+        2048
+    ],
+    "resources": {
+        "number_geysers": 14,
+        "number_minerals": 108
+    },
+    "tile_dimensions": [
+        "tile",
+        128,
+        128
+    ],
+    "walk_dimensions": [
+        "walk",
+        512,
+        512
+    ]
+}
