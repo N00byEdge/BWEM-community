@@ -1,4 +1,4 @@
-#if 0
+#if 1
 #include <vector>
 
 std::vector<std::string> mapsForTest = {
