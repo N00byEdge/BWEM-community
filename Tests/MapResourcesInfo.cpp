@@ -53,15 +53,21 @@ TEST_P(MapResourcesInfo, MapMineralCount) {
 	EXPECT_EQ(expectedMineralsCount, bwemCalculatedMineralsCount);
 }
 
+std::vector<MapResourcesTestParameters> getTestData(
+	std::vector<MapResourcesTestParameters> && v)
+{
+	return v;
+}
+
 INSTANTIATE_TEST_CASE_P(
 	SynteticCheck,
 	MapResourcesInfo,
-	::testing::Values(
+	::testing::ValuesIn(getTestData({
 		std::make_tuple("data/maps/(2)Showdown.scx", 6, 46),
 
 		// Map without resources
 		std::make_tuple("data/maps/onlydirt.scm", 0, 0),
-		
+
 		// Open BW does not support small-sized minerals and gases
 		// See when https://github.com/OpenBW/openbw/issues/19 resolved to unlock
 		// std::make_tuple("data/maps/resources.scm", 3 /* + 9 small gases */, 13 /* + 4 small minerals */),
@@ -70,14 +76,14 @@ INSTANTIATE_TEST_CASE_P(
 		// In this map all minerals and geysers have just 1% of their total amount 
 		// of 1500 minerals or 5000 gas
 		std::make_tuple("data/maps/resources_smallamount.scm", 3, 13)
-	));
+	})));
 
 
 
 INSTANTIATE_TEST_CASE_P(
 	SSCAITMaps,
 	MapResourcesInfo,
-	::testing::Values(
+	::testing::ValuesIn(getTestData({
 		std::make_tuple("data/maps/sscai/(2)Benzene.scx", 10, 86),
 		std::make_tuple("data/maps/sscai/(2)Destination.scx", 10, 128),
 		std::make_tuple("data/maps/sscai/(2)Heartbreak Ridge.scx", 10, 120),
@@ -95,5 +101,5 @@ INSTANTIATE_TEST_CASE_P(
 		std::make_tuple("data/maps/sscai/(4)La Mancha1.1.scx", 12, 96),
 		std::make_tuple("data/maps/sscai/(4)Python.scx", 12, 110),
 		std::make_tuple("data/maps/sscai/(4)Roadrunner.scx", 12, 96)
-	));
+	})));
 #endif
