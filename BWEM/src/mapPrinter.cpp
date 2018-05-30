@@ -13,8 +13,6 @@
 #ifdef BWEM_USE_MAP_PRINTER
 
 #include "map.h"
-#include "../EasyBMP_1.06/EasyBMP.h"
-
 
 using namespace BWAPI;
 using namespace BWAPI::UnitTypes::Enum;
@@ -35,9 +33,9 @@ namespace utils {
 //                                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-const string MapPrinter::m_fileName = "bwapi-data/map.bmp";
+const string MapPrinter::m_fileName = "bwapi-data/map.png";
 
-std::unique_ptr<BMP> MapPrinter::m_pBMP;
+std::unique_ptr<MapPrinter::MigImage> MapPrinter::m_pImage;
 MapPrinter MapPrinter::m_Instance;
 const Map * MapPrinter::m_pMap = nullptr;
 
@@ -82,33 +80,23 @@ void MapPrinter::Initialize(const Map * pMap)
 	bwem_assert_throw_plus(canWrite(m_fileName), "MapPrinter could not create the file " + m_fileName);
 
 	m_pMap = pMap;
-	m_pBMP = make_unique<BMP>();
-	m_pBMP->SetSize(bw->mapWidth()*4, bw->mapHeight()*4);
-	m_pBMP->SetBitDepth(24);
+	m_pImage = make_unique<MapPrinter::MigImage>(pMap->WalkSize().x, pMap->WalkSize().y);
 }
 
 
 MapPrinter::~MapPrinter()
 {
-	if (canWrite(m_fileName)) m_pBMP->WriteToFile(m_fileName.c_str());
+	if (canWrite(m_fileName)) m_pImage->writeToPNG(m_fileName);
 
 //	Uncomment the 2 lines below to write one more copy of the bitmap, in the folder of the map used, with the same name.
 //	string twinFileName = bw->mapPathName().substr(0, bw->mapPathName().size()-3) + "bmp";
-//	if (canWrite(twinFileName)) m_pBMP->WriteToFile(twinFileName.c_str());
+//	if (canWrite(twinFileName)) m_pImage->WriteToFile(twinFileName.c_str());
 }
 
 
 void MapPrinter::Point(int x, int y, Color col)
 {
-	bwem_assert((0 <= x) && (x < m_pBMP->TellWidth()));
-	bwem_assert((0 <= y) && (y < m_pBMP->TellHeight()));
-
-	RGBApixel rgba;
-	rgba.Red = col.red;
-	rgba.Green = col.green;
-	rgba.Blue = col.blue;
-
-	m_pBMP->SetPixel(x, y, rgba);
+	if (m_pImage->isValid(x, y)) m_pImage->drawPixel(x, y, col.red, col.green, col.blue);
 }
 
 
@@ -155,6 +143,38 @@ void MapPrinter::Circle(WalkPosition Center, int radius, Color col, fill_t fillM
 	}
 }
 
+#ifndef STB_IMAGE_WRITE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#endif
+
+#if defined(_MSC_VER) || defined(MSCV) || defined(_MSCV)
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
+#ifndef STBI_MSC_SECURE_CRT
+#define STBI_MSC_SECURE_CRT
+#endif
+
+#endif
+
+#include "stb_image_write.h"
+
+void MapPrinter::MigImage::writeToPNG(const std::string &filename) const
+{
+	const size_t pixelDataLength = _width * _height * RgbPixel::comp;
+	auto pixelData(std::make_unique<unsigned char[]>(pixelDataLength));
+	copyRgbPixelsTo(pixelData);
+
+	const int strideInBytes = _width * RgbPixel::comp;
+
+	stbi_write_png(filename.c_str(), _width, _height, RgbPixel::comp, pixelData.get(), strideInBytes);
+}
 	
 }} // namespace BWEM::utils
 

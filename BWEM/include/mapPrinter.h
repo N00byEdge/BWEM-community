@@ -16,7 +16,6 @@
 #include "utils.h"
 #include "defs.h"
 
-class BMP;
 namespace BWEM {
 class Map;
 namespace utils {
@@ -108,11 +107,73 @@ public:
 	MapPrinter &				operator=(const MapPrinter &) = delete;
 
 private:
+
+	class MigImage
+	{
+	public:
+		MigImage() = delete;
+
+		MigImage(const int width, const int height)
+			: _width(width)
+			, _height(height)
+			, _pixels(std::make_unique<RgbPixel[]>(size_t(width) * size_t(height)))
+		{
+			for (int y = 0; y < _height; ++y) {
+				for (int x = 0; x < _width; ++x) {
+					drawPixel(x, y, 0, 0, 0);
+				}
+			}
+		}
+
+		void drawPixel(const int x, const int y, const unsigned char red, const unsigned char green, const unsigned char blue)
+		{
+			const auto index = calculateIndex(x, y);
+			auto &pixel = _pixels[index];
+			pixel.r = red;
+			pixel.g = green;
+			pixel.b = blue;
+		}
+
+		bool isValid(const int x, const int y) const noexcept { return (x >= 0 && x < _width && y >= 0 && y < _height); }
+		void writeToPNG(const std::string &filename) const;
+
+	private:
+		struct RgbPixel
+		{
+			static const unsigned char comp = 3;
+
+			unsigned char r;
+			unsigned char g;
+			unsigned char b;
+
+			RgbPixel() : r(0), g(0), b(0) {}
+			RgbPixel(const unsigned char red, const unsigned char green, const unsigned char blue) : r(red), g(green), b(blue) {}
+		};
+
+		const int _width;
+		const int _height;
+		std::unique_ptr<RgbPixel[]> _pixels;
+
+		size_t calculateIndex(const int x, const int y) const noexcept { return size_t(_width) * size_t(y) + size_t(x); }
+
+		void copyRgbPixelsTo(std::unique_ptr<unsigned char[]> &pixelData) const
+		{
+			size_t index = 0;
+			for (int y = 0; y < _height; ++y) {
+				for (int x = 0; x < _width; ++x) {
+					const auto &pixel = _pixels[calculateIndex(x, y)];
+					pixelData[index++] = pixel.r;
+					pixelData[index++] = pixel.g;
+					pixelData[index++] = pixel.b;
+				}
+			}
+		}
+	};
+	static std::unique_ptr<MigImage> m_pImage;
+
 								MapPrinter() = default;
 								~MapPrinter();
 
-
-	static std::unique_ptr<BMP>	m_pBMP;
 	static MapPrinter			m_Instance;
 	static const Map *			m_pMap;
 	static const std::string	m_fileName;
