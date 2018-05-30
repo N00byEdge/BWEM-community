@@ -1,3 +1,5 @@
+#if 1
+
 #include <string>
 #include <iomanip>
 #include "bwem.h"
@@ -105,7 +107,7 @@ json mapToJson(BWEM::detail::MapImpl const & map)
 TEST(test, test)
 {
 	BWEM::detail::MapImpl map;
-	std::string mapName = "data/maps/(2)Showdown.scx";
+	std::string mapName = "data/maps/onlydirt.scx";
 
 	runOnMap(mapName, [&](auto game) {
 		map.Initialize(game);
@@ -114,4 +116,4 @@ TEST(test, test)
 
 	std::cerr << std::setw(4) << mapToJson(map) << "\n";
 }
-
+#endif
