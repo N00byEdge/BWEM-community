@@ -5,10 +5,6 @@ image: Visual Studio 2017
 shallow_clone: false
 clone_depth: 5
 
-environment:
-  mpq_decryption_key:
-    secure: pXIJzmDBCbR+oFPGeg3izuhDCv/rRSdtJd6wHSfQXuU=
-
 install:
   - git submodule update --init --recursive
   - ps: >-
@@ -18,12 +14,9 @@ install:
 
 before_test:
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/BrooDat.mpq.enc' -OutFile 'C:/projects/bwem-community/BrooDat.mpq.enc'
-  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/StarDat.mpq.enc' -OutFile 'C:/projects/bwem-community/StarDat.mpq.enc'
-  - ps: Invoke-WebRequest 'https://n00byedge.com/mpqs/patch_rt.mpq.enc' -OutFile 'C:/projects/bwem-community/patch_rt.mpq.enc'
-  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/BrooDat.mpq.enc -secret %mpq_decryption_key%
-  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/StarDat.mpq.enc -secret %mpq_decryption_key%
-  - cmd: appveyor-tools\secure-file -decrypt C:/projects/bwem-community/patch_rt.mpq.enc -secret %mpq_decryption_key%
+  - ps: Invoke-WebRequest 'https://github.com/kovarex/BhaalBot/raw/master/Starcraft/BROODAT.MPQ' -OutFile 'C:/projects/bwem-community/BrooDat.mpq'
+  - ps: Invoke-WebRequest 'https://github.com/kovarex/BhaalBot/raw/master/Starcraft/STARDAT.MPQ' -OutFile 'C:/projects/bwem-community/StarDat.mpq.enc'
+  - ps: Invoke-WebRequest 'https://github.com/kovarex/BhaalBot/raw/master/Starcraft/patch_rt.mpq' -OutFile 'C:/projects/bwem-community/patch_rt.mpq.enc'
   - cmd: move *.mpq %CONFIGURATION%/
 
 build:
