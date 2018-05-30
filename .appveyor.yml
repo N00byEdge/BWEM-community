@@ -13,9 +13,10 @@ install:
       }
 
 before_test:
-  - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   - ps: Invoke-WebRequest 'https://github.com/kovarex/BhaalBot/raw/master/Starcraft/BROODAT.MPQ' -OutFile 'C:/projects/bwem-community/BrooDat.mpq'
+  - cmd: timeout 5 > NUL
   - ps: Invoke-WebRequest 'https://github.com/kovarex/BhaalBot/raw/master/Starcraft/STARDAT.MPQ' -OutFile 'C:/projects/bwem-community/StarDat.mpq.enc'
+  - cmd: timeout 5 > NUL
   - ps: Invoke-WebRequest 'https://github.com/kovarex/BhaalBot/raw/master/Starcraft/patch_rt.mpq' -OutFile 'C:/projects/bwem-community/patch_rt.mpq.enc'
   - cmd: move *.mpq %CONFIGURATION%/
 
