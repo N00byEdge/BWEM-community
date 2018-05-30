@@ -9,9 +9,9 @@
 typedef std::tuple<
 	std::string,
 	int,
-	int> MapDimensionsTestParameters;
+	int> MapResourcesTestParameters;
 
-class MapResourcesInfo : public ::testing::TestWithParam<MapDimensionsTestParameters> {
+class MapResourcesInfo : public ::testing::TestWithParam<MapResourcesTestParameters> {
 };
 
 TEST_P(MapResourcesInfo, MapGeyserCount) {
@@ -71,6 +71,8 @@ INSTANTIATE_TEST_CASE_P(
 		// of 1500 minerals or 5000 gas
 		std::make_tuple("data/maps/resources_smallamount.scm", 3, 13)
 	));
+
+
 
 INSTANTIATE_TEST_CASE_P(
 	SSCAITMaps,
