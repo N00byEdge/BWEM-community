@@ -2,6 +2,7 @@
 #include "bwem.h"
 #include "mapImpl.h"
 #include <optional>
+#include <string_view>
 
 #include "MapTest.hpp"
 
@@ -70,17 +71,17 @@ TEST_P(MapResourcesInfo, MapMineralCount) {
 }
 
 std::vector<MapResourcesTestParameters> getTestData(
-	std::vector<MapResourcesTestParameters> const & v)
+	std::vector<std::string> const & v)
 {
 	std::vector<MapResourcesTestParameters> params;
 
 	for (auto const & test : v) {
-		std::string root = test.mapName.substr(0, test.mapName.size() - 3);
+		std::string root = test.substr(0, test.size() - 3);
 		std::cout << root << "json" << std::endl;
 		std::ifstream json_file("../Tests/" + root + "json");
 		if (!json_file) {
 			params.emplace_back(
-				test.mapName,
+				test,
 				"could not open JSON file"
 			);
 		}
@@ -88,21 +89,11 @@ std::vector<MapResourcesTestParameters> getTestData(
 			nlohmann::json json;
 			json_file >> json;
 
-			if (json["resources"]["number_geysers"] != test.expectedGeysers) {
-				std::cerr << "number_geyesers bad\n";
-				abort();
-			}
-			else if (json["resources"]["number_minerals"] != test.expectedMinerals) {
-				std::cerr << "number_minerals bad\n";
-				abort();
-			}
-			else {
-				params.emplace_back(
-					test.mapName,
-					json["resources"]["number_geysers"],
-					json["resources"]["number_minerals"]
-				);
-			}
+			params.emplace_back(
+				test,
+				json["resources"]["number_geysers"],
+				json["resources"]["number_minerals"]
+			);
 		}
 	}
 	return params;
@@ -112,19 +103,19 @@ INSTANTIATE_TEST_CASE_P(
 	SynteticCheck,
 	MapResourcesInfo,
 	::testing::ValuesIn(getTestData({
-		MapResourcesTestParameters("data/maps/(2)Showdown.scx", 6, 46),
+		"data/maps/(2)Showdown.scx",
 
 		// Map without resources
-		MapResourcesTestParameters("data/maps/onlydirt.scm", 0, 0),
+		"data/maps/onlydirt.scm",
 
 		// Open BW does not support small-sized minerals and gases
 		// See when https://github.com/OpenBW/openbw/issues/19 resolved to unlock
 		// MapResourcesTestParameters("data/maps/resources.scm", 3 /* + 9 small gases */, 13 /* + 4 small minerals */),
-		MapResourcesTestParameters("data/maps/resources_usual.scm", 3, 13),
+		"data/maps/resources_usual.scm",
 
 		// In this map all minerals and geysers have just 1% of their total amount 
 		// of 1500 minerals or 5000 gas
-		MapResourcesTestParameters("data/maps/resources_smallamount.scm", 3, 13)
+		"data/maps/resources_smallamount.scm"
 	})));
 
 
@@ -133,22 +124,22 @@ INSTANTIATE_TEST_CASE_P(
 	SSCAITMaps,
 	MapResourcesInfo,
 	::testing::ValuesIn(getTestData({
-		MapResourcesTestParameters("data/maps/sscai/(2)Benzene.scx", 10, 86),
-		MapResourcesTestParameters("data/maps/sscai/(2)Destination.scx", 10, 128),
-		MapResourcesTestParameters("data/maps/sscai/(2)Heartbreak Ridge.scx", 10, 120),
+		"data/maps/sscai/(2)Benzene.scx",
+		"data/maps/sscai/(2)Destination.scx",
+		"data/maps/sscai/(2)Heartbreak Ridge.scx",
 
-		MapResourcesTestParameters("data/maps/sscai/(3)Neo Moon Glaive.scx", 12, 84),
-		MapResourcesTestParameters("data/maps/sscai/(3)Tau Cross.scx", 9, 93),
+		"data/maps/sscai/(3)Neo Moon Glaive.scx",
+		"data/maps/sscai/(3)Tau Cross.scx",
 
-		MapResourcesTestParameters("data/maps/sscai/(4)Andromeda.scx", 14, 126),
-		MapResourcesTestParameters("data/maps/sscai/(4)Circuit Breaker.scx", 12, 124),
-		MapResourcesTestParameters("data/maps/sscai/(4)Electric Circuit.scx", 12, 148),
-		MapResourcesTestParameters("data/maps/sscai/(4)Empire of the Sun.scm", 14, 114),
-		MapResourcesTestParameters("data/maps/sscai/(4)Fighting Spirit.scx", 14, 108),
-		MapResourcesTestParameters("data/maps/sscai/(4)Icarus.scm", 12, 96),
-		MapResourcesTestParameters("data/maps/sscai/(4)Jade.scx", 12, 96),
-		MapResourcesTestParameters("data/maps/sscai/(4)La Mancha1.1.scx", 12, 96),
-		MapResourcesTestParameters("data/maps/sscai/(4)Python.scx", 12, 110),
-		MapResourcesTestParameters("data/maps/sscai/(4)Roadrunner.scx", 12, 96)
+		"data/maps/sscai/(4)Andromeda.scx",
+		"data/maps/sscai/(4)Circuit Breaker.scx",
+		"data/maps/sscai/(4)Electric Circuit.scx",
+		"data/maps/sscai/(4)Empire of the Sun.scm",
+		"data/maps/sscai/(4)Fighting Spirit.scx",
+		"data/maps/sscai/(4)Icarus.scm",
+		"data/maps/sscai/(4)Jade.scx",
+		"data/maps/sscai/(4)La Mancha1.1.scx",
+		"data/maps/sscai/(4)Python.scx",
+		"data/maps/sscai/(4)Roadrunner.scx"
 	})));
 #endif
