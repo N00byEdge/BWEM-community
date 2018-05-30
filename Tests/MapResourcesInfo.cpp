@@ -1,9 +1,11 @@
 #if 1
 #include "bwem.h"
 #include "mapImpl.h"
+#include <optional>
 
 #include "MapTest.hpp"
 
+#include "nlohmann/json.hpp"
 #include "gtest/gtest.h"
 
 struct MapResourcesTestParameters
@@ -11,9 +13,17 @@ struct MapResourcesTestParameters
 	std::string mapName;
 	int expectedMinerals;
 	int expectedGeysers;
+	std::optional<std::string> maybeError;
 
-	MapResourcesTestParameters(const char * n, int g, int m)
-		: mapName(n), expectedMinerals(m), expectedGeysers(g)
+	MapResourcesTestParameters(std::string n, int g, int m)
+		: mapName(std::move(n)), expectedMinerals(m), expectedGeysers(g)
+	{}
+
+	MapResourcesTestParameters(std::string n, std::string e)
+		: mapName(std::move(n))
+		, expectedMinerals(-1)
+		, expectedGeysers(-1)
+		, maybeError(std::move(e))
 	{}
 };
 
@@ -60,9 +70,42 @@ TEST_P(MapResourcesInfo, MapMineralCount) {
 }
 
 std::vector<MapResourcesTestParameters> getTestData(
-	std::vector<MapResourcesTestParameters> && v)
+	std::vector<MapResourcesTestParameters> const & v)
 {
-	return v;
+	std::vector<MapResourcesTestParameters> params;
+
+	for (auto const & test : v) {
+		std::string root = test.mapName.substr(0, test.mapName.size() - 3);
+		std::cout << root << "json" << std::endl;
+		std::ifstream json_file("../Tests/" + root + "json");
+		if (!json_file) {
+			params.emplace_back(
+				test.mapName,
+				"could not open JSON file"
+			);
+		}
+		else {
+			nlohmann::json json;
+			json_file >> json;
+
+			if (json["resources"]["number_geysers"] != test.expectedGeysers) {
+				std::cerr << "number_geyesers bad\n";
+				abort();
+			}
+			else if (json["resources"]["number_minerals"] != test.expectedMinerals) {
+				std::cerr << "number_minerals bad\n";
+				abort();
+			}
+			else {
+				params.emplace_back(
+					test.mapName,
+					json["resources"]["number_geysers"],
+					json["resources"]["number_minerals"]
+				);
+			}
+		}
+	}
+	return params;
 }
 
 INSTANTIATE_TEST_CASE_P(
