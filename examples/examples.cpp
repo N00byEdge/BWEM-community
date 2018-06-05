@@ -108,13 +108,13 @@ void drawMap(const Map & theMap, BWAPI::Game *game)
 
 static void printNeutral(const Map & theMap, const Neutral * n, MapPrinter::Color col)
 {
-	const WalkPosition delta(n->Pos().x < theMap.Center().x ? +1 : -1, n->Pos().y < theMap.Center().y ? +1 : -1);
+	const BWAPI::WalkPosition delta(n->Pos().x < theMap.Center().x ? +1 : -1, n->Pos().y < theMap.Center().y ? +1 : -1);
 	const int stackSize = MapPrinter::showStackedNeutrals ? theMap.GetTile(n->TopLeft()).StackedNeutrals() : 1;
 
 	for (int i = 0 ; i < stackSize ; ++i)
 	{
-		auto origin = WalkPosition(n->TopLeft()) + delta * i;
-		auto size = WalkPosition (n->Size());
+		auto origin = BWAPI::WalkPosition(n->TopLeft()) + delta * i;
+		auto size = BWAPI::WalkPosition (n->Size());
 		if (!theMap.Valid(origin) || !theMap.Valid(origin + size - 1)) break;
 
 		MapPrinter::Get().Rectangle(origin, origin + size - 1, col, MapPrinter::fill);
@@ -124,8 +124,8 @@ static void printNeutral(const Map & theMap, const Neutral * n, MapPrinter::Colo
 			{
 				MapPrinter::Get().Point(origin, MapPrinter::Color::blockingNeutrals);
 				MapPrinter::Get().Point(origin + size - 1, MapPrinter::Color::blockingNeutrals);
-				MapPrinter::Get().Point(WalkPosition(origin.x, (origin + size - 1).y), MapPrinter::Color::blockingNeutrals);
-				MapPrinter::Get().Point(WalkPosition((origin + size - 1).x, origin.y), MapPrinter::Color::blockingNeutrals);
+				MapPrinter::Get().Point(BWAPI::WalkPosition(origin.x, (origin + size - 1).y), MapPrinter::Color::blockingNeutrals);
+				MapPrinter::Get().Point(BWAPI::WalkPosition((origin + size - 1).x, origin.y), MapPrinter::Color::blockingNeutrals);
 			}
 			else
 				MapPrinter::Get().Rectangle(origin, origin + size - 1, MapPrinter::Color::blockingNeutrals);
@@ -133,7 +133,7 @@ static void printNeutral(const Map & theMap, const Neutral * n, MapPrinter::Colo
 }
 
 
-static MapPrinter::Color getZoneColor(const Area * area, map<int, MapPrinter::Color> & map_Zone_Color)
+static MapPrinter::Color getZoneColor(const Area * area, std::map<int, MapPrinter::Color> & map_Zone_Color)
 {
 	const int zoneId = MapPrinter::showAreas ? area->Id() : area->GroupId();
 	auto it = map_Zone_Color.emplace(zoneId, MapPrinter::Color());
@@ -154,7 +154,7 @@ static MapPrinter::Color getZoneColor(const Area * area, map<int, MapPrinter::Co
 				// 2) color should differ enough from the colors of the neighbouring Areas
 				 (	MapPrinter::showAreas &&
 					any_of(area->ChokePointsByArea().begin(), area->ChokePointsByArea().end(),
-						[&map_Zone_Color, &color](const pair<const Area *, const std::vector<ChokePoint> *> & neighbour)
+						[&map_Zone_Color, &color](const std::pair<const Area *, const std::vector<ChokePoint> *> & neighbour)
 						{
 							auto it2 = map_Zone_Color.find(neighbour.first->Id());
 							if (it2 == map_Zone_Color.end()) return false;
@@ -171,12 +171,12 @@ static MapPrinter::Color getZoneColor(const Area * area, map<int, MapPrinter::Co
 
 void printMap(const Map & theMap)
 {
-	map<int, MapPrinter::Color> map_Zone_Color;		// a "Zone" is either an Area or a continent
+	std::map<int, MapPrinter::Color> map_Zone_Color;		// a "Zone" is either an Area or a continent
 
 	for (int y = 0 ; y < theMap.WalkSize().y ; ++y)
 	for (int x = 0 ; x < theMap.WalkSize().x ; ++x)
 	{
-		WalkPosition p(x, y);
+		BWAPI::WalkPosition p(x, y);
 		const auto & miniTile = theMap.GetMiniTile(p, check_t::no_check);
 
 		MapPrinter::Color col;
@@ -218,19 +218,19 @@ void printMap(const Map & theMap)
 		for (int y = 0 ; y < theMap.Size().y ; ++y)
 		for (int x = 0 ; x < theMap.Size().x ; ++x)
 		{
-			int data = theMap.GetTile(TilePosition(x, y)).Data();
+			int data = theMap.GetTile(BWAPI::TilePosition(x, y)).Data();
 			uint8_t c = uint8_t(((data/1)*1) % 256);
 			MapPrinter::Color col(c, c, c);
-			WalkPosition origin(TilePosition(x, y));
+			BWAPI::WalkPosition origin(BWAPI::TilePosition(x, y));
 			MapPrinter::Get().Rectangle(origin, origin + 3, col, MapPrinter::fill);
 		}
 
 	if (MapPrinter::showUnbuildable)
 		for (int y = 0 ; y < theMap.Size().y ; ++y)
 		for (int x = 0 ; x < theMap.Size().x ; ++x)
-			if (!theMap.GetTile(TilePosition(x, y)).Buildable())
+			if (!theMap.GetTile(BWAPI::TilePosition(x, y)).Buildable())
 			{
-				WalkPosition origin(TilePosition(x, y));
+				BWAPI::WalkPosition origin(BWAPI::TilePosition(x, y));
 				MapPrinter::Get().Rectangle(origin+1, origin + 2, MapPrinter::Color::unbuildable);
 			}
 
@@ -238,12 +238,12 @@ void printMap(const Map & theMap)
 		for (int y = 0 ; y < theMap.Size().y ; ++y)
 		for (int x = 0 ; x < theMap.Size().x ; ++x)
 		{
-			int groundHeight = theMap.GetTile(TilePosition(x, y)).GroundHeight();
+			int groundHeight = theMap.GetTile(BWAPI::TilePosition(x, y)).GroundHeight();
 			if (groundHeight >= 1)
 				for (int dy = 0 ; dy < 4 ; ++dy)
 				for (int dx = 0 ; dx < 4 ; ++dx)
 				{
-					WalkPosition p = WalkPosition(TilePosition(x, y)) + WalkPosition(dx, dy);
+					BWAPI::WalkPosition p = BWAPI::WalkPosition(BWAPI::TilePosition(x, y)) + BWAPI::WalkPosition(dx, dy);
 					if (theMap.GetMiniTile(p, check_t::no_check).Walkable())		// groundHeight is usefull only for walkable miniTiles
 						if ((dx + dy) & (groundHeight == 1 ? 1 : 3))
 							MapPrinter::Get().Point(p, MapPrinter::Color::higherGround);
@@ -258,9 +258,9 @@ void printMap(const Map & theMap)
 			for (const Base & base : area.Bases())
 			{
 				for (const Mineral * m : base.Minerals())
-					MapPrinter::Get().Line(WalkPosition(base.Center()), WalkPosition(m->Pos()), MapPrinter::Color::bases);
+					MapPrinter::Get().Line(BWAPI::WalkPosition(base.Center()), BWAPI::WalkPosition(m->Pos()), MapPrinter::Color::bases);
 				for (const Geyser * g : base.Geysers())
-					MapPrinter::Get().Line(WalkPosition(base.Center()), WalkPosition(g->Pos()), MapPrinter::Color::bases);
+					MapPrinter::Get().Line(BWAPI::WalkPosition(base.Center()), BWAPI::WalkPosition(g->Pos()), MapPrinter::Color::bases);
 			}
 
 	if (MapPrinter::showGeysers)
@@ -276,10 +276,10 @@ void printMap(const Map & theMap)
 			printNeutral(theMap, s.get(), MapPrinter::Color::staticBuildings);
 
 	if (MapPrinter::showStartingLocations)
-		for (TilePosition t : theMap.StartingLocations())
+		for (BWAPI::TilePosition t : theMap.StartingLocations())
 		{
-			WalkPosition origin(t);
-			WalkPosition size(UnitType(Terran_Command_Center).tileSize());	// same size for other races
+			BWAPI::WalkPosition origin(t);
+			BWAPI::WalkPosition size(BWAPI::UnitType(BWAPI::UnitTypes::Terran_Command_Center).tileSize());	// same size for other races
 			MapPrinter::Get().Rectangle(origin, origin + size - 1, MapPrinter::Color::startingLocations, MapPrinter::fill);
 		}
 
@@ -288,8 +288,8 @@ void printMap(const Map & theMap)
 		{
 			for (const Base & base : area.Bases())
 			{
-				WalkPosition origin(base.Location());
-				WalkPosition size(UnitType(Terran_Command_Center).tileSize());	// same size for other races
+				BWAPI::WalkPosition origin(base.Location());
+				BWAPI::WalkPosition size(BWAPI::UnitType(BWAPI::UnitTypes::Terran_Command_Center).tileSize());	// same size for other races
 				auto dashMode = base.BlockingMinerals().empty() ? MapPrinter::not_dashed : MapPrinter::dashed;
 				MapPrinter::Get().Rectangle(origin, origin + size - 1, MapPrinter::Color::bases, MapPrinter::do_not_fill, dashMode);
 			}
@@ -333,10 +333,10 @@ void pathExample(const Map & theMap)
 
 	const MapPrinter::Color col(255, 255, 255);
 
-	WalkPosition a = WalkPosition(random_element(theMap.StartingLocations()));
+	BWAPI::WalkPosition a = BWAPI::WalkPosition(random_element(theMap.StartingLocations()));
 	
-	WalkPosition b = a;
-	while (b == a) b = WalkPosition(random_element(theMap.StartingLocations()));
+	BWAPI::WalkPosition b = a;
+	while (b == a) b = BWAPI::WalkPosition(random_element(theMap.StartingLocations()));
 
 //	Uncomment this to use random positions for a and b:
 //	a = WalkPosition(theMap.RandomPosition());
@@ -346,7 +346,7 @@ void pathExample(const Map & theMap)
 	MapPrinter::Get().Circle(b, 6, col, MapPrinter::fill);
 
 	int length;
-	const CPPath & Path = theMap.GetPath(Position(a), Position(b), &length);
+	const CPPath & Path = theMap.GetPath(BWAPI::Position(a), BWAPI::Position(b), &length);
 
 	if (length < 0) return;		// cannot reach b from a
 

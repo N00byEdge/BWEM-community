@@ -12,7 +12,6 @@
 
 #include <BWAPI.h>
 
-class BMP;
 namespace BWEM {
 class Map;
 namespace utils {
