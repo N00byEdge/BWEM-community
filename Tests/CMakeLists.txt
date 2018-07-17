@@ -18,7 +18,7 @@ add_library(googletest
 
 file(GLOB testsources
 	#${GOOGLETEST_SOURCES}
-  ${PROJECT_SOURCE_DIR}/tests/*.cpp
+  ${PROJECT_SOURCE_DIR}/Tests/*.cpp
 )
 
 include_directories(
@@ -46,6 +46,7 @@ target_link_libraries(tests
   googletest
   BWEBlib
   BWAPILIB
+  dl
 )
 
 include(CTest)
