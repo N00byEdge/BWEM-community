@@ -13,6 +13,7 @@
 #include "neutral.h"
 #include "base.h"
 #include <map>
+#include <set>
 
 using namespace BWAPI;
 using namespace UnitTypes::Enum;
@@ -69,6 +70,10 @@ const std::vector<ChokePoint> & Area::ChokePoints(const Area * pArea) const
 	return *it->second;
 }
 
+bool Area::isNeighbouringArea(const Area *pArea) const {
+	auto it = m_ChokePointsByArea.find(pArea);
+	return it != m_ChokePointsByArea.end();
+}
 
 void Area::AddGeyser(Geyser * pGeyser)
 {
@@ -76,13 +81,11 @@ void Area::AddGeyser(Geyser * pGeyser)
 	m_Geysers.push_back(pGeyser);
 }
 
-
 void Area::AddMineral(Mineral * pMineral)
 {
 	bwem_assert(pMineral && !contains(m_Minerals, pMineral));
 	m_Minerals.push_back(pMineral);
 }
-
 
 void Area::OnMineralDestroyed(const Mineral * pMineral)
 {
@@ -98,7 +101,6 @@ void Area::OnMineralDestroyed(const Mineral * pMineral)
 		base.OnMineralDestroyed(pMineral);
 }
 
-
 void Area::AddChokePoints(Area * pArea, vector<ChokePoint> * pChokePoints)
 {
 	bwem_assert(!m_ChokePointsByArea[pArea] && pChokePoints);
@@ -108,8 +110,6 @@ void Area::AddChokePoints(Area * pArea, vector<ChokePoint> * pChokePoints)
 	for (const auto & cp : *pChokePoints)
 		m_ChokePoints.push_back(&cp);
 }
-
-
 
 vector<int> Area::ComputeDistances(const ChokePoint * pStartCP, const vector<const ChokePoint *> & TargetCPs) const
 {
@@ -127,7 +127,6 @@ vector<int> Area::ComputeDistances(const ChokePoint * pStartCP, const vector<con
 
 	return ComputeDistances(start, Targets);
 }
-
 
 // Returns Distances such that Distances[i] == ground_distance(start, Targets[i]) in pixels
 // Note: same algorithm than Graph::ComputeDistances (derived from Dijkstra)
@@ -414,6 +413,138 @@ void Area::CreateBases()
 	}
 }
 
+// Thanks to Dave Churchill and the SAIDA team
+void Area::calcBoundaryVertices() const
+{
+	set<Position> unsortedVertices;
+
+	for (auto x(0); x < Map::Instance().Size().x; ++x)
+		for (auto y(0); y < Map::Instance().Size().y; ++y)
+		{
+			TilePosition tp{ x, y };
+
+			if (Map::Instance().GetArea(tp) != this)
+			{
+				continue;
+			}
+
+			TilePosition t1{ tp.x + 1, tp.y };
+			TilePosition t2{ tp.x, tp.y + 1 };
+			TilePosition t3{ tp.x - 1, tp.y };
+			TilePosition t4{ tp.x, tp.y - 1 };
+
+			// a tile is 'surrounded' if
+			// 1) in all 4 directions there's a tile position in the current region
+			// 2) in all 4 directions there's a buildable tile
+			auto surrounded = true;
+
+			if (tp.x == 0 || tp.y == 0
+				|| (t1.isValid() && (Map::Instance().GetArea(t1) != this || !Broodwar->isBuildable(t1)))
+				|| (t2.isValid() && (Map::Instance().GetArea(t2) != this || !Broodwar->isBuildable(t2)))
+				|| (t3.isValid() && (Map::Instance().GetArea(t3) != this || !Broodwar->isBuildable(t3)))
+				|| (t4.isValid() && (Map::Instance().GetArea(t4) != this || !Broodwar->isBuildable(t4))))
+			{
+				surrounded = false;
+			}
+
+			// Area
+			// push the tiles that aren't surrounded
+			if (!surrounded && Broodwar->isBuildable(tp))
+			{
+				unsortedVertices.insert(Position{ tp } +Position{ 16, 16 });
+			}
+		}
+
+	//printf("Area ID = %d, # of unsortedVertices = %d\n", Id(), unsortedVertices.size());
+
+	if (unsortedVertices.empty()) {
+		return;
+	}
+
+	vector<Position> sortedVertices;
+	auto current = *unsortedVertices.begin();
+
+	sortedVertices.push_back(current);
+	unsortedVertices.erase(current);
+
+	// while we still have unsorted vertices left, find the closest one remaining to current
+	while (!unsortedVertices.empty())
+	{
+		double bestDist = 1000000;
+		Position bestPos;
+
+		for (const auto& pos : unsortedVertices)
+		{
+			const auto dist = pos.getDistance(current);
+
+			if (dist < bestDist)
+			{
+				bestDist = dist;
+				bestPos = pos;
+			}
+		}
+
+		current = bestPos;
+		sortedVertices.push_back(bestPos);
+		unsortedVertices.erase(bestPos);
+	}
+
+	// let's close loops on a threshold, eliminating death grooves
+	const auto distanceThreshold = 10;
+
+	while (true)
+	{
+		// find the largest index difference whose distance is less than the threshold
+		auto maxFarthest = 0;
+		auto maxFarthestStart = 0;
+		auto maxFarthestEnd = 0;
+
+		// for each starting vertex
+		for (auto i(0); i < static_cast<int>(sortedVertices.size()); ++i)
+		{
+			auto farthest = 0;
+			auto farthestIndex = 0;
+
+			// only test half way around because we'll find the other one on the way back
+			for (size_t j(1); j < sortedVertices.size() / 2; ++j)
+			{
+				const int jindex = (i + j) % sortedVertices.size();
+
+				if (sortedVertices[i].getDistance(sortedVertices[jindex]) < distanceThreshold)
+				{
+					farthest = j;
+					farthestIndex = jindex;
+				}
+			}
+
+			if (farthest > maxFarthest)
+			{
+				maxFarthest = farthest;
+				maxFarthestStart = i;
+				maxFarthestEnd = farthestIndex;
+			}
+		}
+
+		// stop when we have no long chains within the threshold
+		if (maxFarthest < 4)
+		{
+			break;
+		}
+
+		auto dist = sortedVertices[maxFarthestStart].getDistance(sortedVertices[maxFarthestEnd]);
+
+		vector<Position> temp;
+
+		for (size_t s(maxFarthestEnd); s != maxFarthestStart; s = (s + 1) % sortedVertices.size())
+		{
+			temp.push_back(sortedVertices[s]);
+		}
+
+		sortedVertices = temp;
+	}
+
+	m_boundaryVertices = sortedVertices;
+}
 	
 } // namespace BWEM
 

@@ -146,6 +146,10 @@ public:
 	void							CreateBases();
 	std::vector<Base> &				Bases()					{ return m_Bases; }
 
+	bool							isNeighbouringArea(const Area *pArea) const;
+	void							calcBoundaryVertices() const;
+	std::vector<BWAPI::Position>	getBoundaryVertices() const { return m_boundaryVertices; }
+
 private:
 	const detail::Graph *			GetGraph() const		{ return m_pGraph; }
 	detail::Graph *					GetGraph()				{ return m_pGraph; }
@@ -173,6 +177,8 @@ private:
 	std::vector<Mineral *>			m_Minerals;
 	std::vector<Geyser *>			m_Geysers;
 	std::vector<Base>				m_Bases;
+
+	mutable std::vector<BWAPI::Position>	m_boundaryVertices;
 };
 
 } // namespace BWEM
