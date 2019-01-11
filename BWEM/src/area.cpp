@@ -70,8 +70,8 @@ const std::vector<ChokePoint> & Area::ChokePoints(const Area * pArea) const
 	return *it->second;
 }
 
-bool Area::isNeighbouringArea(const Area *pArea) const {
-	auto it = m_ChokePointsByArea.find(pArea);
+bool Area::IsNeighbouringArea(const Area *pArea) const{
+	const auto it = m_ChokePointsByArea.find(pArea);
 	return it != m_ChokePointsByArea.end();
 }
 
@@ -414,44 +414,43 @@ void Area::CreateBases()
 }
 
 // Thanks to Dave Churchill and the SAIDA team
-void Area::calcBoundaryVertices() const
+void Area::CalcBoundaryVertices() const
 {
-	set<Position> unsortedVertices;
+	vector<Position> unsortedVertices;
 
-	for (auto x(0); x < Map::Instance().Size().x; ++x)
-		for (auto y(0); y < Map::Instance().Size().y; ++y)
+	for (auto x = 0; x < Map::Instance().Size().x * 4; ++x)
+		for (auto y = 0; y < Map::Instance().Size().y * 4; ++y)
 		{
-			TilePosition tp{ x, y };
+			WalkPosition wp{ x, y };
 
-			if (Map::Instance().GetArea(tp) != this)
+			if (Map::Instance().GetArea(wp) != this || !Broodwar->isWalkable(wp))
 			{
 				continue;
 			}
 
-			TilePosition t1{ tp.x + 1, tp.y };
-			TilePosition t2{ tp.x, tp.y + 1 };
-			TilePosition t3{ tp.x - 1, tp.y };
-			TilePosition t4{ tp.x, tp.y - 1 };
+			WalkPosition w1{ wp.x + 1, wp.y };
+			WalkPosition w2{ wp.x, wp.y + 1 };
+			WalkPosition w3{ wp.x - 1, wp.y };
+			WalkPosition w4{ wp.x, wp.y - 1 };
 
 			// a tile is 'surrounded' if
 			// 1) in all 4 directions there's a tile position in the current region
-			// 2) in all 4 directions there's a buildable tile
 			auto surrounded = true;
 
-			if (tp.x == 0 || tp.y == 0
-				|| (t1.isValid() && (Map::Instance().GetArea(t1) != this || !Broodwar->isBuildable(t1)))
-				|| (t2.isValid() && (Map::Instance().GetArea(t2) != this || !Broodwar->isBuildable(t2)))
-				|| (t3.isValid() && (Map::Instance().GetArea(t3) != this || !Broodwar->isBuildable(t3)))
-				|| (t4.isValid() && (Map::Instance().GetArea(t4) != this || !Broodwar->isBuildable(t4))))
+			if (wp.x == 0 || wp.y == 0 || wp.x == Map::Instance().Size().x * 4 - 1 || wp.y == Map::Instance().Size().y * 4 - 1
+				|| w1.isValid() && Map::Instance().GetArea(w1) != this
+				|| w2.isValid() && Map::Instance().GetArea(w2) != this
+				|| w3.isValid() && Map::Instance().GetArea(w3) != this
+				|| w4.isValid() && Map::Instance().GetArea(w4) != this)
 			{
 				surrounded = false;
 			}
 
 			// Area
 			// push the tiles that aren't surrounded
-			if (!surrounded && Broodwar->isBuildable(tp))
+			if (!surrounded)
 			{
-				unsortedVertices.insert(Position{ tp } +Position{ 16, 16 });
+				unsortedVertices.emplace_back(Position{ wp });
 			}
 		}
 
@@ -465,48 +464,50 @@ void Area::calcBoundaryVertices() const
 	auto current = *unsortedVertices.begin();
 
 	sortedVertices.push_back(current);
-	unsortedVertices.erase(current);
+	unsortedVertices.erase(unsortedVertices.begin());
 
 	// while we still have unsorted vertices left, find the closest one remaining to current
 	while (!unsortedVertices.empty())
 	{
 		double bestDist = 1000000;
 		Position bestPos;
-
-		for (const auto& pos : unsortedVertices)
+		auto index = 0;
+		for (auto i = 0; i < static_cast<int>(unsortedVertices.size()); ++i)
 		{
+			auto pos = unsortedVertices[i];
 			const auto dist = pos.getDistance(current);
 
 			if (dist < bestDist)
 			{
 				bestDist = dist;
 				bestPos = pos;
+				index = i;
 			}
 		}
 
 		current = bestPos;
 		sortedVertices.push_back(bestPos);
-		unsortedVertices.erase(bestPos);
+		unsortedVertices.erase(unsortedVertices.begin() + index);
 	}
 
 	// let's close loops on a threshold, eliminating death grooves
-	const auto distanceThreshold = 10;
+	const auto distanceThreshold = 2.5;
 
 	while (true)
 	{
 		// find the largest index difference whose distance is less than the threshold
 		auto maxFarthest = 0;
-		auto maxFarthestStart = 0;
+		size_t maxFarthestStart = 0;
 		auto maxFarthestEnd = 0;
 
 		// for each starting vertex
-		for (auto i(0); i < static_cast<int>(sortedVertices.size()); ++i)
+		for (auto i = 0; i < static_cast<int>(sortedVertices.size()); ++i)
 		{
 			auto farthest = 0;
 			auto farthestIndex = 0;
 
 			// only test half way around because we'll find the other one on the way back
-			for (size_t j(1); j < sortedVertices.size() / 2; ++j)
+			for (size_t j = 1; j < sortedVertices.size() / 2; ++j)
 			{
 				const int jindex = (i + j) % sortedVertices.size();
 
@@ -535,7 +536,7 @@ void Area::calcBoundaryVertices() const
 
 		vector<Position> temp;
 
-		for (size_t s(maxFarthestEnd); s != maxFarthestStart; s = (s + 1) % sortedVertices.size())
+		for (size_t s = maxFarthestEnd; s != maxFarthestStart; s = (s + 1) % sortedVertices.size())
 		{
 			temp.push_back(sortedVertices[s]);
 		}
