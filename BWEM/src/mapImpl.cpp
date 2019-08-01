@@ -139,7 +139,7 @@ void MapImpl::LoadData(BWAPI::Game *game)
 			// Ensures buildable ==> walkable:
 			for (int dy = 0 ; dy < 4 ; ++dy)
 			for (int dx = 0 ; dx < 4 ; ++dx)
-				GetMiniTile_(WalkPosition(t) + WalkPosition(dx, dy), check_t::no_check).SetWalkable(true);
+				GetMiniTile_(WalkPosition(t) + WalkPosition(dx, dy), check_t::no_check).SetBuildable(true);
 		}
 
 		// Add groundHeight and doodad information:
