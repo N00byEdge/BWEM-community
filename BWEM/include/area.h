@@ -117,7 +117,7 @@ public:
 	bool							IsNeighbouringArea(const Area *pArea) const;
 
 	// Calculates the boundary of the Area.
-	void							CalcBoundaryVertices() const;
+	void CalcBoundaryVertices(bool checkNeutrals = false) const;
 
 	// Returns the boundary as a vector of BWAPI::Position
 	const std::vector<BWAPI::Position> & GetBoundaryVertices() const { return m_boundaryVertices; }

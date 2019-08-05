@@ -414,16 +414,36 @@ void Area::CreateBases()
 }
 
 // Thanks to Dave Churchill and the SAIDA team
-void Area::CalcBoundaryVertices() const
+// Calculates boundaries of areas, if checkNeutrals then considers minerals and geysers are unwalkable positions, experimental feature and causes extra loops around neutral resources, removing "surrounded" std::find checks removes the loops but causes path jumps
+void Area::CalcBoundaryVertices(bool checkNeutrals) const
 {
-	vector<Position> unsortedVertices;
-
+	vector<Position> vertices;
+	vector<BWAPI::WalkPosition> neutrals{};
+	
+	if (checkNeutrals) {
+		for (auto& m : this->m_Minerals) {
+			WalkPosition pos = BWAPI::WalkPosition{ m->TopLeft() };
+			for (int ii = 0; ii < 8; ++ii) {
+				for (int jj = 0; jj < 4; ++jj) {
+					neutrals.emplace_back(pos + BWAPI::WalkPosition{ ii,jj });
+				}
+			}
+		}
+		for (auto& m : this->m_Geysers) {
+			WalkPosition pos = BWAPI::WalkPosition{ m->TopLeft() };
+			for (int ii = 0; ii < 16; ++ii) {
+				for (int jj = 0; jj < 8; ++jj) {
+					neutrals.emplace_back(pos + BWAPI::WalkPosition{ ii, jj });
+				}
+			}
+		}
+	}
+	
 	for (auto x = 0; x < Map::Instance().Size().x * 4; ++x)
 		for (auto y = 0; y < Map::Instance().Size().y * 4; ++y)
 		{
 			WalkPosition wp{ x, y };
-
-			if (Map::Instance().GetArea(wp) != this || !Broodwar->isWalkable(wp))
+			if (Map::Instance().GetArea(wp) != this || !Broodwar->isWalkable(wp) || std::find(neutrals.begin(), neutrals.end(), wp) != neutrals.end())
 			{
 				continue;
 			}
@@ -438,10 +458,10 @@ void Area::CalcBoundaryVertices() const
 			auto surrounded = true;
 
 			if (wp.x == 0 || wp.y == 0 || wp.x == Map::Instance().Size().x * 4 - 1 || wp.y == Map::Instance().Size().y * 4 - 1
-				|| w1.isValid() && Map::Instance().GetArea(w1) != this
-				|| w2.isValid() && Map::Instance().GetArea(w2) != this
-				|| w3.isValid() && Map::Instance().GetArea(w3) != this
-				|| w4.isValid() && Map::Instance().GetArea(w4) != this)
+				|| w1.isValid() && (Map::Instance().GetArea(w1) != this || std::find(neutrals.begin(), neutrals.end(), w1) != neutrals.end())
+				|| w2.isValid() && (Map::Instance().GetArea(w2) != this || std::find(neutrals.begin(), neutrals.end(), w2) != neutrals.end())
+				|| w3.isValid() && (Map::Instance().GetArea(w3) != this || std::find(neutrals.begin(), neutrals.end(), w3) != neutrals.end())
+				|| w4.isValid() && (Map::Instance().GetArea(w4) != this || std::find(neutrals.begin(), neutrals.end(), w4) != neutrals.end()))
 			{
 				surrounded = false;
 			}
@@ -450,101 +470,21 @@ void Area::CalcBoundaryVertices() const
 			// push the tiles that aren't surrounded
 			if (!surrounded)
 			{
-				unsortedVertices.emplace_back(Position{ wp });
+				vertices.emplace_back(Position{ wp });
 			}
 		}
 
-	//printf("Area ID = %d, # of unsortedVertices = %d\n", Id(), unsortedVertices.size());
-
-	if (unsortedVertices.empty()) {
+	if (vertices.empty()) {
 		return;
 	}
-
-	vector<Position> sortedVertices;
-	auto current = *unsortedVertices.begin();
-
-	sortedVertices.push_back(current);
-	unsortedVertices.erase(unsortedVertices.begin());
-
-	// while we still have unsorted vertices left, find the closest one remaining to current
-	while (!unsortedVertices.empty())
+	auto current = *vertices.begin();
+	std::sort(vertices.begin() + 1, vertices.end(), 
+		[current](const BWAPI::Position& a, const BWAPI::Position& b) -> bool
 	{
-		double bestDist = 1000000;
-		Position bestPos;
-		auto index = 0;
-		for (auto i = 0; i < static_cast<int>(unsortedVertices.size()); ++i)
-		{
-			auto pos = unsortedVertices[i];
-			const auto dist = pos.getDistance(current);
+		return a.getDistance(current) < b.getDistance(current);
+	});
 
-			if (dist < bestDist)
-			{
-				bestDist = dist;
-				bestPos = pos;
-				index = i;
-			}
-		}
-
-		current = bestPos;
-		sortedVertices.push_back(bestPos);
-		unsortedVertices.erase(unsortedVertices.begin() + index);
-	}
-
-	// let's close loops on a threshold, eliminating death grooves
-	const auto distanceThreshold = 2.5;
-
-	while (true)
-	{
-		// find the largest index difference whose distance is less than the threshold
-		auto maxFarthest = 0;
-		size_t maxFarthestStart = 0;
-		auto maxFarthestEnd = 0;
-
-		// for each starting vertex
-		for (auto i = 0; i < static_cast<int>(sortedVertices.size()); ++i)
-		{
-			auto farthest = 0;
-			auto farthestIndex = 0;
-
-			// only test half way around because we'll find the other one on the way back
-			for (size_t j = 1; j < sortedVertices.size() / 2; ++j)
-			{
-				const int jindex = (i + j) % sortedVertices.size();
-
-				if (sortedVertices[i].getDistance(sortedVertices[jindex]) < distanceThreshold)
-				{
-					farthest = j;
-					farthestIndex = jindex;
-				}
-			}
-
-			if (farthest > maxFarthest)
-			{
-				maxFarthest = farthest;
-				maxFarthestStart = i;
-				maxFarthestEnd = farthestIndex;
-			}
-		}
-
-		// stop when we have no long chains within the threshold
-		if (maxFarthest < 4)
-		{
-			break;
-		}
-
-		auto dist = sortedVertices[maxFarthestStart].getDistance(sortedVertices[maxFarthestEnd]);
-
-		vector<Position> temp;
-
-		for (size_t s = maxFarthestEnd; s != maxFarthestStart; s = (s + 1) % sortedVertices.size())
-		{
-			temp.push_back(sortedVertices[s]);
-		}
-
-		sortedVertices = temp;
-	}
-
-	m_boundaryVertices = sortedVertices;
+	m_boundaryVertices = vertices;
 }
 	
 } // namespace BWEM
