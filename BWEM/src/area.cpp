@@ -13,6 +13,7 @@
 #include "neutral.h"
 #include "base.h"
 #include <map>
+#include <set>
 
 using namespace BWAPI;
 using namespace UnitTypes::Enum;
@@ -69,6 +70,10 @@ const std::vector<ChokePoint> & Area::ChokePoints(const Area * pArea) const
 	return *it->second;
 }
 
+bool Area::IsNeighbouringArea(const Area *pArea) const{
+	const auto it = m_ChokePointsByArea.find(pArea);
+	return it != m_ChokePointsByArea.end();
+}
 
 void Area::AddGeyser(Geyser * pGeyser)
 {
@@ -76,13 +81,11 @@ void Area::AddGeyser(Geyser * pGeyser)
 	m_Geysers.push_back(pGeyser);
 }
 
-
 void Area::AddMineral(Mineral * pMineral)
 {
 	bwem_assert(pMineral && !contains(m_Minerals, pMineral));
 	m_Minerals.push_back(pMineral);
 }
-
 
 void Area::OnMineralDestroyed(const Mineral * pMineral)
 {
@@ -98,7 +101,6 @@ void Area::OnMineralDestroyed(const Mineral * pMineral)
 		base.OnMineralDestroyed(pMineral);
 }
 
-
 void Area::AddChokePoints(Area * pArea, vector<ChokePoint> * pChokePoints)
 {
 	bwem_assert(!m_ChokePointsByArea[pArea] && pChokePoints);
@@ -108,8 +110,6 @@ void Area::AddChokePoints(Area * pArea, vector<ChokePoint> * pChokePoints)
 	for (const auto & cp : *pChokePoints)
 		m_ChokePoints.push_back(&cp);
 }
-
-
 
 vector<int> Area::ComputeDistances(const ChokePoint * pStartCP, const vector<const ChokePoint *> & TargetCPs) const
 {
@@ -127,7 +127,6 @@ vector<int> Area::ComputeDistances(const ChokePoint * pStartCP, const vector<con
 
 	return ComputeDistances(start, Targets);
 }
-
 
 // Returns Distances such that Distances[i] == ground_distance(start, Targets[i]) in pixels
 // Note: same algorithm than Graph::ComputeDistances (derived from Dijkstra)
@@ -414,6 +413,79 @@ void Area::CreateBases()
 	}
 }
 
+// Thanks to Dave Churchill and the SAIDA team
+// Calculates boundaries of areas, if checkNeutrals then considers minerals and geysers are unwalkable positions, experimental feature and causes extra loops around neutral resources, removing "surrounded" std::find checks removes the loops but causes path jumps
+void Area::CalcBoundaryVertices(bool checkNeutrals) const
+{
+	vector<Position> vertices;
+	vector<BWAPI::WalkPosition> neutrals{};
+	
+	if (checkNeutrals) {
+		for (auto& m : this->m_Minerals) {
+			WalkPosition pos = BWAPI::WalkPosition{ m->TopLeft() };
+			for (int ii = 0; ii < 8; ++ii) {
+				for (int jj = 0; jj < 4; ++jj) {
+					neutrals.emplace_back(pos + BWAPI::WalkPosition{ ii,jj });
+				}
+			}
+		}
+		for (auto& m : this->m_Geysers) {
+			WalkPosition pos = BWAPI::WalkPosition{ m->TopLeft() };
+			for (int ii = 0; ii < 16; ++ii) {
+				for (int jj = 0; jj < 8; ++jj) {
+					neutrals.emplace_back(pos + BWAPI::WalkPosition{ ii, jj });
+				}
+			}
+		}
+	}
+	
+	for (auto x = 0; x < Map::Instance().Size().x * 4; ++x)
+		for (auto y = 0; y < Map::Instance().Size().y * 4; ++y)
+		{
+			WalkPosition wp{ x, y };
+			if (Map::Instance().GetArea(wp) != this || !Broodwar->isWalkable(wp) || std::find(neutrals.begin(), neutrals.end(), wp) != neutrals.end())
+			{
+				continue;
+			}
+
+			WalkPosition w1{ wp.x + 1, wp.y };
+			WalkPosition w2{ wp.x, wp.y + 1 };
+			WalkPosition w3{ wp.x - 1, wp.y };
+			WalkPosition w4{ wp.x, wp.y - 1 };
+
+			// a tile is 'surrounded' if
+			// 1) in all 4 directions there's a tile position in the current region
+			auto surrounded = true;
+
+			if (wp.x == 0 || wp.y == 0 || wp.x == Map::Instance().Size().x * 4 - 1 || wp.y == Map::Instance().Size().y * 4 - 1
+				|| w1.isValid() && (Map::Instance().GetArea(w1) != this || std::find(neutrals.begin(), neutrals.end(), w1) != neutrals.end())
+				|| w2.isValid() && (Map::Instance().GetArea(w2) != this || std::find(neutrals.begin(), neutrals.end(), w2) != neutrals.end())
+				|| w3.isValid() && (Map::Instance().GetArea(w3) != this || std::find(neutrals.begin(), neutrals.end(), w3) != neutrals.end())
+				|| w4.isValid() && (Map::Instance().GetArea(w4) != this || std::find(neutrals.begin(), neutrals.end(), w4) != neutrals.end()))
+			{
+				surrounded = false;
+			}
+
+			// Area
+			// push the tiles that aren't surrounded
+			if (!surrounded)
+			{
+				vertices.emplace_back(Position{ wp });
+			}
+		}
+
+	if (vertices.empty()) {
+		return;
+	}
+	auto current = *vertices.begin();
+	std::sort(vertices.begin() + 1, vertices.end(), 
+		[current](const BWAPI::Position& a, const BWAPI::Position& b) -> bool
+	{
+		return a.getDistance(current) < b.getDistance(current);
+	});
+
+	m_boundaryVertices = vertices;
+}
 	
 } // namespace BWEM
 

@@ -113,6 +113,15 @@ public:
 	// See also GroupId()
 	bool							AccessibleFrom(const Area * pArea) const	{ return GroupId() == pArea->GroupId(); }
 
+	// Returns true if there is a ChokePoint shared by both Areas.
+	bool							IsNeighbouringArea(const Area *pArea) const;
+
+	// Calculates the boundary of the Area.
+	void CalcBoundaryVertices(bool checkNeutrals = false) const;
+
+	// Returns the boundary as a vector of BWAPI::Position
+	const std::vector<BWAPI::Position> & GetBoundaryVertices() const { return m_boundaryVertices; }
+
 	// Returns the Minerals contained in this Area.
 	// Note: only a call to Map::OnMineralDestroyed(BWAPI::Unit u) may change the result (by removing eventually one element).
 	const std::vector<Mineral *> &	Minerals() const		{ return m_Minerals; }
@@ -173,6 +182,8 @@ private:
 	std::vector<Mineral *>			m_Minerals;
 	std::vector<Geyser *>			m_Geysers;
 	std::vector<Base>				m_Bases;
+
+	mutable std::vector<BWAPI::Position>	m_boundaryVertices;
 };
 
 } // namespace BWEM
