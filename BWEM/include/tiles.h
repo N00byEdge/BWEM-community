@@ -78,7 +78,6 @@ public:
 //	Details: The functions below are used by the BWEM's internals
 
 	void				SetWalkable(bool walkable)	{ m_areaId = (walkable ? -1 : 0); m_altitude = (walkable ? -1 : 1); }
-	void				SetBuildable(bool buildable){ m_areaId = (buildable ? -1 : 0); }
 	bool				SeaOrLake() const			{ return m_altitude == 1; }
 	void				SetSea()					{ bwem_assert(!Walkable() && SeaOrLake()); m_altitude = 0; }
 	void				SetLake()					{ bwem_assert(!Walkable() && Sea()); m_altitude = -1; }

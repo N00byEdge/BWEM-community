@@ -127,27 +127,40 @@ void MapImpl::LoadData(BWAPI::Game *game)
 					GetMiniTile_(w, check_t::no_check).SetWalkable(false);
 			}
 
-	// Mark buildable tiles (tiles are unbuildable by default)
-	for (int y = 0 ; y < Size().y ; ++y)
-	for (int x = 0 ; x < Size().x ; ++x)
-	{
-		TilePosition t(x, y);
-		if (game->isBuildable(t))
-		{
-			GetTile_(t).SetBuildable();
+    // Mark buildable tiles (tiles are unbuildable by default)
+    for (int y = 0; y < Size().y; ++y)
+        for (int x = 0; x < Size().x; ++x)
+        {
+            TilePosition t(x, y);
 
-			// Ensures buildable ==> walkable:
-			for (int dy = 0 ; dy < 4 ; ++dy)
-			for (int dx = 0 ; dx < 4 ; ++dx)
-				GetMiniTile_(WalkPosition(t) + WalkPosition(dx, dy), check_t::no_check).SetBuildable(true);
-		}
+            // Set buildble
+            auto buildable = bw->isBuildable(t);
+            if (buildable)
+                GetTile_(t).SetBuildable();
 
-		// Add groundHeight and doodad information:
-		int bwapiGroundHeight = game->getGroundHeight(t);
-		GetTile_(t).SetGroundHeight(bwapiGroundHeight / 2);
-		if (bwapiGroundHeight % 2)
-			GetTile_(t).SetDoodad();
-	}
+            // Check if tile is fully walkable
+            auto walkable = true;
+            for (int dy = 0; dy < 4; ++dy) {
+                for (int dx = 0; dx < 4; ++dx) {
+                    const auto w = WalkPosition(t) + WalkPosition(dx, dy);
+                    if (!bw->isWalkable(w))
+                        walkable = false;
+                }
+            }
+
+            // Set walkable if buildable or fully walkable
+            if (buildable || walkable) {
+                for (int dy = 0; dy < 4; ++dy)
+                    for (int dx = 0; dx < 4; ++dx)
+                        GetMiniTile_(WalkPosition(t) + WalkPosition(dx, dy), check_t::no_check).SetWalkable(true);
+            }
+
+            // Add groundHeight and doodad information:
+            int bwapiGroundHeight = bw->getGroundHeight(t);
+            GetTile_(t).SetGroundHeight(bwapiGroundHeight / 2);
+            if (bwapiGroundHeight % 2)
+                GetTile_(t).SetDoodad();
+        }
 }
 
 
