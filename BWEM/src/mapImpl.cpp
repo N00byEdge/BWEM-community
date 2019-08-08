@@ -134,7 +134,7 @@ void MapImpl::LoadData(BWAPI::Game *game)
             TilePosition t(x, y);
 
             // Set buildble
-            auto buildable = bw->isBuildable(t);
+            auto buildable = game->isBuildable(t);
             if (buildable)
                 GetTile_(t).SetBuildable();
 
@@ -143,7 +143,7 @@ void MapImpl::LoadData(BWAPI::Game *game)
             for (int dy = 0; dy < 4; ++dy) {
                 for (int dx = 0; dx < 4; ++dx) {
                     const auto w = WalkPosition(t) + WalkPosition(dx, dy);
-                    if (!bw->isWalkable(w))
+                    if (!game->isWalkable(w))
                         walkable = false;
                 }
             }
@@ -156,7 +156,7 @@ void MapImpl::LoadData(BWAPI::Game *game)
             }
 
             // Add groundHeight and doodad information:
-            int bwapiGroundHeight = bw->getGroundHeight(t);
+            int bwapiGroundHeight = game->getGroundHeight(t);
             GetTile_(t).SetGroundHeight(bwapiGroundHeight / 2);
             if (bwapiGroundHeight % 2)
                 GetTile_(t).SetDoodad();
