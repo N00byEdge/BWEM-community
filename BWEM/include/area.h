@@ -111,7 +111,7 @@ public:
 	//       we can have: a->AccessibleFrom(b)
 	//       and not:     contains(a->AccessibleNeighbours(), b)
 	// See also GroupId()
-	bool							AccessibleFrom(const Area * pArea) const	{ return GroupId() == pArea->GroupId(); }
+	bool							AccessibleFrom(const Area * pArea) const	{ return pArea ? GroupId() == pArea->GroupId() : false; }
 
 	// Returns the Minerals contained in this Area.
 	// Note: only a call to Map::OnMineralDestroyed(BWAPI::Unit u) may change the result (by removing eventually one element).
