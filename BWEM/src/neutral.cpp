@@ -96,15 +96,12 @@ void Neutral::RemoveFromTiles()
 		auto & tile = MapImpl::Get(GetMap())->GetTile_(TopLeft() + TilePosition(dx, dy));
 		bwem_assert(tile.GetNeutral());
 
-        if (!tile.GetNeutral())
-            continue;
-
 		if (tile.GetNeutral() == this)
 		{
 			tile.RemoveNeutral(this);
 			if (m_pNextStacked) tile.AddNeutral(m_pNextStacked);
 		}
-		else
+		else if (tile.GetNeutral())
 		{
 			Neutral * pPrevStacked = tile.GetNeutral();
 			while (pPrevStacked->NextStacked() != this)
