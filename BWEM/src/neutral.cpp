@@ -96,6 +96,9 @@ void Neutral::RemoveFromTiles()
 		auto & tile = MapImpl::Get(GetMap())->GetTile_(TopLeft() + TilePosition(dx, dy));
 		bwem_assert(tile.GetNeutral());
 
+        if (!tile.GetNeutral())
+            continue;
+
 		if (tile.GetNeutral() == this)
 		{
 			tile.RemoveNeutral(this);
@@ -104,7 +107,7 @@ void Neutral::RemoveFromTiles()
 		else
 		{
 			Neutral * pPrevStacked = tile.GetNeutral();
-			while (pPrevStacked != nullptr && pPrevStacked->NextStacked() != this)
+			while (pPrevStacked->NextStacked() != this)
 			{
 				pPrevStacked = pPrevStacked->NextStacked();
 			}
@@ -131,7 +134,7 @@ vector<const Area *> Neutral::BlockedAreas() const
 {
 	vector<const Area *> Result;
 	for (WalkPosition w : m_blockedAreas) {
-		auto area = GetMap()->GetArea(w);
+		auto area = GetMap()->GetNearestArea(w);
 
 		// if walk position belongs to any area
 		if (area)
